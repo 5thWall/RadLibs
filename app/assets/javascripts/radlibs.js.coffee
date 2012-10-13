@@ -19,6 +19,11 @@ setup_new = (form) ->
       vals[key] ||= []
       vals[key].push val
 
+    $("span[data-type='single']").each ->
+      key = $(@).data 'key'
+      val = $(@).text()
+      vals[key] = val
+
     $("input#radlib_words").val JSON.stringify(vals)
 
   $("input[type='submit']").click ->
