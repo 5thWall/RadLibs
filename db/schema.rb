@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013055057) do
+ActiveRecord::Schema.define(:version => 20121013061127) do
 
   create_table "radlibs", :force => true do |t|
     t.integer  "template_id"
     t.integer  "user_id"
-    t.text     "word"
+    t.text     "words"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
