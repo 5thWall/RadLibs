@@ -6,8 +6,16 @@ class TemplatesController < ApplicationController
   end
 
   def show
-    @template = Template.find(params[:id])
-
+    @template = Template.find(params[:id]) 
+@words = {
+  :Adjective => "evil",
+  :PluralNoun => "Henchmen",
+  :FemaleName1 => "Matilda",
+  :FemaleName2 => "Bertrice",
+  :Noun => "kumquat",
+  :Place => "township",
+  :JobTitle => "accountant"
+}
   end
 
   def new

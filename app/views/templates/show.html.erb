@@ -11,7 +11,7 @@
 </h4>
 
 <p>
-  <%=simple_format (@template.template) %>
+  <%=Mustache.render (@template.template), @words %>
 </p>
 <br />
 
