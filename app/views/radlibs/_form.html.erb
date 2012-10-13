@@ -3,11 +3,14 @@
 
   <div class="form-inputs">
 
-    <%= f.input :template_id %>
+    <% present @radlib do |presenter| %>
+    <div id="radlib">
+      <%= presenter.editable_radlib %>
+    </div>
+    <% end %>
 
-    <%= f.input :user_id %>
-
-    <%= f.input :words %>
+    <%= f.input :words, as: :hidden %>
+    <%= f.association :template, as: :hidden %>
   </div>
 
   <div class="form-actions">

@@ -1,0 +1,10 @@
+{
+  "Adjective" : ["pretty", "stupid","shiny"],
+  "PluralNoun" : ["Henchmen", "Grapes"],
+  "FemaleName1" : "Matilda",
+  "FemaleName2" : "Bertrice",
+  "Noun" : ["kumquat","pickle barrel"],
+  "Place" : ["township"],
+  "JobTitle" : ["accountant"],
+  "IngVerb" : ["Trumpeting"]
+}
