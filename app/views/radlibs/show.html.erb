@@ -10,7 +10,7 @@
   <%= @radlib.user_id %>
 </p>
 
-<% present @radlib, RadlibsPresenter do |presenter| %>
+<% present @radlib do |presenter| %>
 <p>
   <b>radlib:</b>
   <%= presenter.filled_in_radlib %>

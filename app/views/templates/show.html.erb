@@ -16,4 +16,5 @@
 <br />
 
 <%= link_to 'Edit', edit_template_path(@template) %> |
-<%= link_to 'Back', templates_path %>
+<%= link_to 'Back', templates_path %> |
+<%= link_to 'Fill Out!', new_radlib_path(template_id: @template) %>

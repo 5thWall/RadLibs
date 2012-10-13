@@ -6,15 +6,17 @@
     <div class="itsnew pull-right"></div>
     <%end%>
     <h5><%= template. title %></h5>
+
     <p>
     <%= truncate(template.template, 
       :omission => "...", :length => 240) %>
     </p>
-    <br />
+    <br /><br />
     <%= link_to 'Show', template %> |
     <%= link_to 'Edit', edit_template_path(template) %> |
+    <%= link_to 'Fill In!', new_radlib_path(template_id: template) %> |
     <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
-    
+
     <div class="pull-right">
     | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
     <% if current_user && !current_user.voted_for?(template) %>
@@ -24,7 +26,6 @@
 	</div>
   <hr>
 <% end %>
-</table>
 <br />
 <br />
 <% if user_signed_in? %>
