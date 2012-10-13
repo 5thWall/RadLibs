@@ -1,21 +1,15 @@
 class TemplatesController < ApplicationController
-  # GET /templates
-  # GET /templates.json
+
   def index
     @templates = Template.all
 
   end
 
-  # GET /templates/1
-  # GET /templates/1.json
   def show
     @template = Template.find(params[:id])
 
-
   end
 
-  # GET /templates/new
-  # GET /templates/new.json
   def new
   if user_signed_in?
     @template = Template.new
@@ -25,17 +19,18 @@ class TemplatesController < ApplicationController
 
   end
 
-  # GET /templates/1/edit
+
   def edit
     @template = Template.find(params[:id])
   end
 
-  # POST /templates
-  # POST /templates.json
+
   def create
+  	@user = current_user
     @template = Template.new(params[:template])
 
       if @template.save
+      @user.templates << @template
          redirect_to @template, notice: 'Template was successfully created.'
       else
         render "new"
@@ -43,8 +38,6 @@ class TemplatesController < ApplicationController
    end
 
 
-  # PUT /templates/1
-  # PUT /templates/1.json
   def update
     @template = Template.find(params[:id])
 
@@ -58,8 +51,7 @@ class TemplatesController < ApplicationController
       end
     end
 
-  # DELETE /templates/1
-  # DELETE /templates/1.json
+
   def destroy
     @template = Template.find(params[:id])
     @template.destroy
@@ -71,8 +63,7 @@ class TemplatesController < ApplicationController
   def vote
   	value = params[:type] == "up" ? 1 : -1
   	@template = Template.find(params[:id])
-    @template.add_evaluation(:votes, :value, current_user)
- 
+    @template.add_evaluation(:votes, value, current_user)
       redirect_to :back, notice: "Thank you for voting."
   end
 end
