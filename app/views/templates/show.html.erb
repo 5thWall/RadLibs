@@ -1,19 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b> title:</b>
+<h4>
   <%= @template. title %>
-</p>
+</h4>
 
 <p>
-  <b>Template:</b>
-  <%= @template.template %>
+  <%=simple_format (@template.template) %>
 </p>
 
-<p>
-  <b>User:</b>
-  <%= @template.user_id %>
-</p>
 
 
 <%= link_to 'Edit', edit_template_path(@template) %> |

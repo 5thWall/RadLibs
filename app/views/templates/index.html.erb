@@ -1,16 +1,17 @@
 <h3>Radlib Templates</h3>
-
+<hr>
 
 <% @templates.each do |template| %>
-    <%= template. title %><br />
-    <%= template.template %><br />
-    <%= link_to 'Show', template %>
-    <%= link_to 'Edit', edit_template_path(template) %>
+    <h5><%= template. title %></h5>
+    <%= truncate(template.template, 
+      :omission => "...", :length => 240) %><br /><br />
+    <%= link_to 'Show', template %> |
+    <%= link_to 'Edit', edit_template_path(template) %> |
     <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
-  </tr>
+  <hr>
 <% end %>
 </table>
-
+<br />
 <br />
 <% if user_signed_in? %>
 <%= link_to '+ New Template', new_template_path %>
