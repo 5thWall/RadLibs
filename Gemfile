@@ -8,6 +8,7 @@ group :assets do
 end
 group :production do
   gem 'mysql2'
+  gem 'therubyracer'
 end
 gem 'jquery-rails'
 gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
