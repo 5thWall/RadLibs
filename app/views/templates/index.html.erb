@@ -3,10 +3,11 @@
 
 <% @templates.each do |template| %>
     <h5><%= template. title %></h5>
-    <%= truncate(template.template, 
+    <%= truncate(template.template,
       :omission => "...", :length => 240) %><br /><br />
     <%= link_to 'Show', template %> |
     <%= link_to 'Edit', edit_template_path(template) %> |
+    <%= link_to 'Fill In!', new_radlib_path(template_id: template) %> |
     <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
   <hr>
 <% end %>
