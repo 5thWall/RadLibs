@@ -52,7 +52,7 @@ private
     @vals[name] = value
 
     self.class.send(:define_method, name) do
-      @vals[name].pop
+      @vals[name].shift
     end
   end
 
