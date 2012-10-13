@@ -1,19 +1,33 @@
 <%= link_to image_tag( 'logo.png'), 'http://www.google.com', :class => 'brand' %>
+<ul class="nav">
+  <% if user_signed_in? %>
+    <li>
+    <%= link_to 'Templates', templates_path %>      
+    </li>
+    <li>
+    <%= link_to 'Radlibs', radlibs_path %>      
+    </li>
+</ul>
+<%end%>
 <ul class="nav pull-right">
   <% if user_signed_in? %>
     <li>
     <%= link_to 'Logout', signout_path %>      
     </li>
+</ul>
   <% else %>
     <li>
     <%= link_to 'Login', signin_path %> 
     </li>
+</ul>
   <% end %>
   <% if user_signed_in? %>
     <% if current_user.has_role? :admin %>
+    <ul class="nav pull-right">
       <li>
       <%= link_to 'Admin', users_path %>
       </li>
+      </ul>
     <% end %>
   <% end %>
 </ul>
