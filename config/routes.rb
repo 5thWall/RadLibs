@@ -1,7 +1,11 @@
 Radlibs5::Application.routes.draw do
   resources :radlibs
 
-  resources :templates
+  resources :templates do
+  	member do
+  		post :vote
+  	end
+  end
 
   root :to => "home#index"
   resources :users, :only => [:index, :show, :edit, :update ]

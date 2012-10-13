@@ -5,6 +5,7 @@ body{
 }
 a{
 	font-family: Droid Sans, helvetica;	
+	color: #6c9aa8;
 }
 h1,h2,h3,h4,h5,h6,h7{
 font-family: Trocchi, helvetica;
@@ -30,14 +31,22 @@ box-shadow:none;
 	background:white;
 	box-shadow: 0px 2px 1px #85a379;
 	border-radius:0px;
+	min-height: 700px;
 }
 .navbar .nav > li > a {
 float: none;
 padding: 20px 15px 10px;
-color: #2b241e;
+color: white;
 text-decoration: none;
 text-shadow: 0 1px 0 #85a379;
 font-family: Droid Sans, helvetica;	
+}
+.navbar .nav > li > a:hover {
+color: 2b241e;
+transition: color 0.5s;
+-moz-transition: color 0.5s; /* Firefox 4 */
+-webkit-transition: color 0.5s; /* Safari and Chrome */
+-o-transition: color 0.5s; /* Opera */
 }
 .navbar .brand {
 float: left;
@@ -48,4 +57,21 @@ font-size: 20px;
 font-weight: 200;
 color: #555;
 text-shadow: 0 1px 0 white;
+}
+.rep{
+	color: white!important;
+	font-size:18px;
+	margin-right: 0px;
+	padding: 20px 0px 10px 38px!important;
+	text-decoration: none;
+	text-shadow: 0 1px 0 #85a379;
+	font-family: Droid Sans, helvetica;	
+	background:url(<%= asset_path "rep.png" %>) no-repeat;
+	width:55px;
+	margin-left:10px;
+}
+.itsnew{
+	background:url(<%= asset_path "new.png" %>) no-repeat;
+	width:31px;
+	height: 32px;
 }

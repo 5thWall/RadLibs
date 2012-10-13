@@ -1,3 +1,23 @@
-<h3>User</h3>
-<p>User: <%= @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+<h3><%= @user.name %></h3>
+<h5><%= @user.email if @user.email %></h5>
+
+<% @user.templates.each do |template| %>
+    <h5><%= template. title %></h5>
+    <p>
+    <%= truncate(template.template, 
+      :omission => "...", :length => 240) %>
+    </p>
+    <br />
+    <%= link_to 'Show', template %> |
+    <%= link_to 'Edit', edit_template_path(template) %> |
+    <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
+    
+    <div class="pull-right">
+    | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
+    <% if current_user && !current_user.voted_for?(template) %>
+      | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
+      | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
+    <% end %>
+	</div>
+  <hr>
+<% end %>

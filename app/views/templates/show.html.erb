@@ -1,14 +1,19 @@
 <p id="notice"><%= notice %></p>
-
+<div class="pull-right">
+| <%= pluralize @template.reputation_for(:votes).to_i, "vote" %>
+<% if current_user && !current_user.voted_for?(@template) %>
+  | <%= link_to "up", vote_template_path(@template, type: "up"), method: "post" %>
+  | <%= link_to "down", vote_template_path(@template, type: "down"), method: "post" %>
+<% end %>
+</div>
 <h4>
   <%= @template. title %>
 </h4>
 
 <p>
-  <%=simple_format (@template.template) %>
+  <%=Mustache.render (@template.template), @words %>
 </p>
-
-
+<br />
 
 <%= link_to 'Edit', edit_template_path(@template) %> |
 <%= link_to 'Back', templates_path %>
