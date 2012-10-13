@@ -43,14 +43,10 @@ class RadlibsController < ApplicationController
   def create
     @radlib = Radlib.new(params[:radlib])
 
-    respond_to do |format|
-      if @radlib.save
-        format.html { redirect_to @radlib, notice: 'Radlib was successfully created.' }
-        format.json { render json: @radlib, status: :created, location: @radlib }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @radlib.errors, status: :unprocessable_entity }
-      end
+    if @radlib.save
+      redirect_to @radlib, notice: 'Radlib was successfully created.'
+    else
+      render action: "new"
     end
   end
 
@@ -59,14 +55,10 @@ class RadlibsController < ApplicationController
   def update
     @radlib = Radlib.find(params[:id])
 
-    respond_to do |format|
-      if @radlib.update_attributes(params[:radlib])
-        format.html { redirect_to @radlib, notice: 'Radlib was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @radlib.errors, status: :unprocessable_entity }
-      end
+    if @radlib.update_attributes(params[:radlib])
+      redirect_to @radlib, notice: 'Radlib was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
