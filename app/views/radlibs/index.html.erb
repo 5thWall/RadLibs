@@ -1,9 +1,10 @@
 <h3>Radlibs</h3>
 
 <% @radlibs.each do |radlib| %>
-  
+
     <%= radlib.template.template %>
-    <%= radlib.radlib %>
+    <%= radlib.words %>
+
     <%= link_to 'Show', radlib %>
     <%= link_to 'Edit', edit_radlib_path(radlib) %>
     <%= link_to 'Destroy', radlib, method: :delete, data: { confirm: 'Are you sure?' } %>
