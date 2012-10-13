@@ -1,27 +1,16 @@
-<h1>Listing templates</h1>
+<h3>Radlib Templates</h3>
 
-<table>
-  <tr>
-    <th> title</th>
-    <th>Template</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <% @templates.each do |template| %>
-  <tr>
-    <td><%= template. title %></td>
-    <td><%= template.template %></td>
-    <td><%= template.user_id %></td>
-    <td><%= link_to 'Show', template %></td>
-    <td><%= link_to 'Edit', edit_template_path(template) %></td>
-    <td><%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%= template. title %><br />
+    <%= template.template %><br />
+    <%= link_to 'Show', template %>
+    <%= link_to 'Edit', edit_template_path(template) %>
+    <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Template', new_template_path %>
+<%= link_to '+ New Template', new_template_path %>
