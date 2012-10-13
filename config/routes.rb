@@ -1,4 +1,8 @@
 Radlibs5::Application.routes.draw do
+  resources :words
+
+  resources :templates
+
   root :to => "home#index"
   resources :users, :only => [:index, :show, :edit, :update ]
   match '/auth/:provider/callback' => 'sessions#create'
