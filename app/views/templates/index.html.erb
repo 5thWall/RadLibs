@@ -12,5 +12,6 @@
 </table>
 
 <br />
-
+<% if user_signed_in? %>
 <%= link_to '+ New Template', new_template_path %>
+<% end %>

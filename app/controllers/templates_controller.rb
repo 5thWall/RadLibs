@@ -20,7 +20,7 @@ class TemplatesController < ApplicationController
   if user_signed_in?
     @template = Template.new
   else
-  redirect_to root_path
+  redirect_to templates_path
   end
 
   end

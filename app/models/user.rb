@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   rolify
   attr_accessible :provider, :uid, :name, :email
+  
+  has_many :templates
 
   def self.create_with_omniauth(auth)
     create! do |user|

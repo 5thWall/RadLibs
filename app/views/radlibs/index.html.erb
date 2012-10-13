@@ -1,0 +1,17 @@
+<h3>Radlibs</h3>
+
+<% @radlibs.each do |radlib| %>
+  
+    <%= radlib. template_id %>
+    <%= radlib.user_id %>
+    <%= radlib.radlib %>
+    <%= link_to 'Show', radlib %>
+    <%= link_to 'Edit', edit_radlib_path(radlib) %>
+    <%= link_to 'Destroy', radlib, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New radlib', new_radlib_path %>

@@ -1,5 +1,5 @@
 Radlibs5::Application.routes.draw do
-  resources :words
+  resources :radlibs
 
   resources :templates
 
