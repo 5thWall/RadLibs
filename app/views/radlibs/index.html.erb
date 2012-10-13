@@ -2,8 +2,9 @@
 
 <% @radlibs.each do |radlib| %>
 
-    <%= radlib.template.template %>
-    <%= radlib.words %>
+    <% present radlib do |presenter| %>
+    <%= presenter.filled_in_radlib %>
+    <% end %>
 
     <%= link_to 'Show', radlib %>
     <%= link_to 'Edit', edit_radlib_path(radlib) %>

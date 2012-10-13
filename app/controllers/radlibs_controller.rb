@@ -24,7 +24,8 @@ class RadlibsController < ApplicationController
   # GET /radlibs/new
   # GET /radlibs/new.json
   def new
-    @radlib = Radlib.new
+    @template = Template.find params[:template_id]
+    @radlib = @template.radlibs.build
 
     respond_to do |format|
       format.html # new.html.erb
