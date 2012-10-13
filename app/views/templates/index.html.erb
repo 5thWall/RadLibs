@@ -3,11 +3,22 @@
 
 <% @templates.each do |template| %>
     <h5><%= template. title %></h5>
+    <p>
     <%= truncate(template.template, 
-      :omission => "...", :length => 240) %><br /><br />
+      :omission => "...", :length => 240) %>
+    </p>
+    <br />
     <%= link_to 'Show', template %> |
     <%= link_to 'Edit', edit_template_path(template) %> |
     <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
+    
+    <div class="pull-right">
+    | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
+    <% if current_user && !current_user.voted_for?(template) %>
+      | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
+      | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
+    <% end %>
+	</div>
   <hr>
 <% end %>
 </table>

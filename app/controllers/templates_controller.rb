@@ -48,16 +48,15 @@ class TemplatesController < ApplicationController
   def update
     @template = Template.find(params[:id])
 
-    respond_to do |format|
+   
       if @template.update_attributes(params[:template])
-        format.html { redirect_to @template, notice: 'Template was successfully updated.' }
-        format.json { head :no_content }
+        redirect_to @template, notice: 'Template was successfully updated.' 
+       
       else
-        format.html { render action: "edit" }
-        format.json { render json: @template.errors, status: :unprocessable_entity }
+        render "edit" 
+     
       end
     end
-  end
 
   # DELETE /templates/1
   # DELETE /templates/1.json
@@ -65,9 +64,15 @@ class TemplatesController < ApplicationController
     @template = Template.find(params[:id])
     @template.destroy
 
-    respond_to do |format|
-      format.html { redirect_to templates_url }
-      format.json { head :no_content }
+	redirect_to templates_url
     end
+
+  
+  def vote
+  	value = params[:type] == "up" ? 1 : -1
+  	@template = Template.find(params[:id])
+    @template.add_evaluation(:votes, :value, current_user)
+ 
+      redirect_to :back, notice: "Thank you for voting."
   end
 end
