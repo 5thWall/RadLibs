@@ -10,8 +10,14 @@
     <%= f.input :user_id, :as => :hidden, :value => current_user %>
 
   </div>
-<br />
 
-    <%= f.button :submit, "Publish Template", :class => "btn-inverse"%>
+  <br />
+
+  <span class="warning">
+    Once your template has been published, you won't be able to come back and
+    edit it again. Please make sure you're ready to publish.
+  </span>
+  <br />
+  <%= f.button :submit, "Publish Template", :class => "btn-inverse"%>
 
 <% end %>
