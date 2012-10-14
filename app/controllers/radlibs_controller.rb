@@ -2,12 +2,8 @@ class RadlibsController < ApplicationController
   # GET /radlibs
   # GET /radlibs.json
   def index
-    @radlibs = Radlib.all
+    @radlibs = Radlib.find(:all, :order => "created_at desc")
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @radlibs }
-    end
   end
 
   # GET /radlibs/1
@@ -15,10 +11,6 @@ class RadlibsController < ApplicationController
   def show
     @radlib = Radlib.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @radlib }
-    end
   end
 
   # GET /radlibs/new
@@ -27,10 +19,6 @@ class RadlibsController < ApplicationController
     @template = Template.find params[:template_id]
     @radlib = @template.radlibs.build
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @radlib }
-    end
   end
 
   # GET /radlibs/1/edit
@@ -69,10 +57,9 @@ class RadlibsController < ApplicationController
     @radlib = Radlib.find(params[:id])
     @radlib.destroy
 
-    respond_to do |format|
-      format.html { redirect_to radlibs_url }
-      format.json { head :no_content }
-    end
+
+    redirect_to radlibs_url
+
   end
 
   def vote

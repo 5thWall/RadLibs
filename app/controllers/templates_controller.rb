@@ -1,7 +1,7 @@
 class TemplatesController < ApplicationController
 
   def index
-    @templates = Template.all
+    @templates = Template.find(:all, :order => "created_at desc")
   end
 
   def show
