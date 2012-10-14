@@ -25,12 +25,24 @@ private
   DELIMETER_END = /\}\}/    # /\}/
 
   def escaped_template
-    template = @radlib.template.template.gsub DELIMITER_START, '{{{'
+    template = sanitized_template DELIMITER_START, '{{{'
     template.gsub DELIMETER_END, '}}}'
   end
 
   def unescaped_template
-    @radlib.template.template
+    sanitized_template
+  end
+
+  def sanitized_template
+    template = @template.template
+    template = template.gsub /\{\{\{/, '{{'
+    template = template.gsub /\}\}\}/, '}}'
+    template = template.gsub /\{\{(.*?)\}\}/ do |match|
+      str = $1.split(' ').join('_')
+      "{{#{str}}}"
+    end
+    template = template.gsub /\{\{[\#\/\^\=]/, '{{'
+    template.gsub /\=\}\}/, '}}'
   end
 end
 

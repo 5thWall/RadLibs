@@ -41,18 +41,30 @@ private
   DELIMETER_END = /\}\}/    # /\}/
 
   def truncated_escaped_template
-    template = @page_template.truncate @template.template, omission: "...", length: 360, seperator: ' '
+    template = @page_template.truncate sanitized_template, omission: "...", length: 360, seperator: ' '
     template = template.gsub DELIMITER_START, '{{{'
     template.gsub DELIMETER_END, '}}}'
   end
 
   def escaped_template
-    template = @template.template.gsub DELIMITER_START, '{{{'
+    template = sanitized_template.gsub DELIMITER_START, '{{{'
     template.gsub DELIMETER_END, '}}}'
   end
 
   def unescaped_template
-    @template.template
+    sanitized_template
+  end
+
+  def sanitized_template
+    template = @template.template
+    template = template.gsub /\{\{\{/, '{{'
+    template = template.gsub /\}\}\}/, '}}'
+    template = template.gsub /\{\{(.*?)\}\}/ do |match|
+      str = $1.split(' ').join('_')
+      "{{#{str}}}"
+    end
+    template = template.gsub /\{\{[\#\/\^\=]/, '{{'
+    template.gsub /\=\}\}/, '}}'
   end
 end
 
