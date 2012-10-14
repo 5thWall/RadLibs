@@ -1,7 +1,7 @@
-<%= stylesheet_link_tag "radlibs", :media => "all" %>
+<% content_for :title do "#{@radlib.template.title} by #{@radlib.user.name}" end %>
 <p>
-  Filled in by:<br />
-  <h4><%= @radlib.user.name %></h4>
+  <h3><%= @radlib.template.title %></h3>
+  <h4>Filled in by: <%= @radlib.user.name %></h4>
 </p>
 
 <% present @radlib do |presenter| %>
