@@ -9,7 +9,7 @@
 
     <p>
     <%= truncate(template.template, 
-      :omission => "...", :length => 240) %>
+      :omission => "...", :length => 360) %><%= (template.template).scan(/\w+/).size %>
     </p>
     <br /><br />
     <%= link_to 'Show', template %> |
@@ -19,7 +19,7 @@
 
     <div class="pull-right">
     | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
-    <% if current_user && current_user.voted_for?(template) %>
+    <% if current_user && !current_user.voted_for?(template) %>
       | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
       | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
     <% end %>

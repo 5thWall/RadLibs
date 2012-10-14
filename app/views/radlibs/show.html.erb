@@ -1,18 +1,10 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <b> template:</b>
-  <%= @radlib. template_id %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @radlib.user_id %>
+  Filled in by:<br />
+  <h4><%= @radlib.user.name %></h4>
 </p>
 
 <% present @radlib do |presenter| %>
 <p>
-  <b>radlib:</b>
   <%= presenter.filled_in_radlib %>
 </p>
 <% end %>
