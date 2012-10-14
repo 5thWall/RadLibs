@@ -19,6 +19,7 @@
 <%= link_to 'Back', templates_path %> |
 <%= link_to 'Fill Out!', new_radlib_path(template_id: @template) %>
 <hr>
-<% @template.radlibs do |radlib|%>
-<%= radlib.user %>
+<% @template.radlibs.each_with_index do |radlib, n|%>
+<h4><%= n + 1%>.</h4>Response by: <%= radlib.user.name %>
+<div class="pull-right"><%= link_to "Read", radlib_path(radlib), :class => "btn btn-mini" %></div>
 <% end %>
