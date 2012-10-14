@@ -14,6 +14,22 @@ class TemplatePresenter
     edit.render(escaped_template).html_safe
   end
 
+  def get_words_count
+    p_toks = lambda { |tok| (tok.instance_of? Array) && (tok[0] == :mustache) }
+    t = Mustache::Template.new(@template.template).tokens.find_all &p_toks
+    t.inject(0) do |m, v|
+      m += 1
+    end
+  end
+
+#   def get_words_count
+#     p_toks = lambda { |tok| (tok.instance_of? Array) && (tok[0] == :mustache) }
+#     tokens = Mustache::Template.new(@template.template).tokens.find_all &p_toks
+#     tokens.inject(0) do |m,v|
+#       m++
+#     end
+#   end
+
 private
 
   # We can change the delimeter so authors only need to use one
