@@ -2,24 +2,29 @@
 <ul class="nav">
   <% if user_signed_in? %>
     <li>
-    <%= link_to 'Templates', templates_path %>      
+    <%= link_to 'Templates', templates_path %>
     </li>
     <li>
-    <%= link_to 'Radlibs', radlibs_path %>      
+    <%= link_to 'Radlibs', radlibs_path %>
     </li>
-    
+
 </ul>
 <%end%>
 <ul class="nav pull-right">
   <% if user_signed_in? %>
     <li>
-    <%= link_to 'Logout', signout_path %>      
+    <%= link_to 'Logout', signout_path %>
     </li>
 
 </ul>
   <% else %>
+    <% unless Rails.env.production? %>
     <li>
-    <%= link_to 'Login', signin_path %> 
+      <%= link_to 'Developer Login', '/auth/developer' %>
+    </li>
+    <% end %>
+    <li>
+      <%= link_to 'Sign in with Twitter', '/auth/twitter' %>
     </li>
 </ul>
   <% end %>
