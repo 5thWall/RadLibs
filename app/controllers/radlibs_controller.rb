@@ -35,7 +35,7 @@ class RadlibsController < ApplicationController
 
   # GET /radlibs/1/edit
   def edit
-    @radlib = Radlib.find(params[:id])
+    redirect_to radlibs_path
   end
 
   # POST /radlibs
@@ -45,7 +45,7 @@ class RadlibsController < ApplicationController
 
     if @radlib.save
     current_user.radlibs << @radlib
-      redirect_to @radlib, notice: 'Radlib was successfully created.'
+      redirect_to template_path(@radlib.template), notice: 'Radlib was successfully created.'
     else
       render action: "new"
     end
