@@ -9,7 +9,6 @@ $ ->
     setup_new()
 
 setup_new = (form) ->
-  console.log "setting up bindings"
   populate_field = ->
     vals = {}
 
@@ -28,3 +27,27 @@ setup_new = (form) ->
 
   $("input[type='submit']").click ->
     populate_field()
+
+  $("span[contenteditable='true']").each ->
+    $(@).focus ->
+      orig_txt = $(@).text()
+      console.log $(@)
+      console.log $(@).text()
+      $(@).data 'orig', $(@).text()
+
+    $(@).blur ->
+      if /^\s*$/.exec($(@).text())?
+        orig_text = $(@).data('orig') || $(@).data('key')
+        $(@).text orig_text
+
+  $("span[data-type='single']").each ->
+    $(@).blur ->
+      key = $(@).data 'key'
+      text = $(@).text()
+
+      if /^\s*$/.exec(text)? then return
+
+      $("span[data-key='#{key}']").each ->
+        $(@).text(text)
+
+
