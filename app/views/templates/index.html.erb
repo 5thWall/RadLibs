@@ -1,4 +1,9 @@
 <h3>Radlib Templates</h3>
+<% if user_signed_in? %>
+<div>
+<%= link_to '+ New Template', new_template_path %>
+<% end %>
+</div>
 <hr>
 
 <% @templates.each do |template| %>

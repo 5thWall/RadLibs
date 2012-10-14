@@ -1,8 +1,11 @@
-<h3><%= @user.name %></h3>
-<h5><%= @user.email if @user.email %></h5>
+<h3><%= @user.name %></h3><br />
+<%= link_to @user.reputation_for(:votes).to_i, user_path(@user), :class => "rep2" %>
 
+<hr>
+<h5>Radlib Templates:</h5>
+<hr>
 <% @user.templates.each do |template| %>
-    <h5><%= template. title %></h5>
+    <h6><%= template. title %></h6>
     <p>
     <%= truncate(template.template, 
       :omission => "...", :length => 240) %>
@@ -19,5 +22,22 @@
       | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
     <% end %>
 	</div>
+  <hr>
+<% end %>
+
+<h5>Filled-Out Radlibs:</h5>
+<hr>
+<% @user.radlibs.each do |radlib| %>
+    <h6><%= radlib.template.title %></h6>
+    <p>
+   <% present radlib do |presenter| %>
+   <%= presenter.filled_in_radlib %>
+   <% end %>
+    </p>
+    <br />
+    <%= link_to 'Show', radlib %> |
+    <%= link_to 'Edit', edit_template_path(radlib) %> |
+    <%= link_to 'Destroy', radlib, method: :delete, data: { confirm: 'Are you sure?' } %>
+ 
   <hr>
 <% end %>
