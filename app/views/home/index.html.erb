@@ -1,14 +1,17 @@
 <div class="span8 pull-left home_main">
 <h4>Welcome to Radlibs</h4>
-<hr><hr>
+<hr>
+<h7><strong>Create {{adjective}} stories to {{verb}} with your friends!</strong></h7>
+<hr>
 <h5>Recent Radlib Templates</h5>
+
+<div class="itsnew"></div>
+
 <hr width="250px">
 <% @recenttemplates.each do |template| %>
-    <%if template.created_at >= Time.now - 24.hours%>
-    <div class="itsnew pull-right"></div>
-    <%end%>
+    
     <h6><%= template.title %></h6>
-
+	<h7 class="pull-left name_push"><%= template.user.name %></h7>
     <% present template do |presenter| %>
     <p>
     <%= presenter.truncated_template_sans_markup %>
@@ -32,13 +35,12 @@
 <% end %>
 <hr>
 <h5>Recent Radlibs</h5>
+<div class="itsnew"></div>
 <hr width="250px">
 
 <% @recentradlibs.each do |radlib| %>
-<%if radlib.created_at >= Time.now - 24.hours%>
-<div class="itsnew pull-right"></div>
-<%end%>
 <h6><%= radlib.template.title %></h6>
+<h7 class="pull-left name_push"><%= radlib.user.name %></h7>
     <% present radlib do |presenter| %>
     <%= presenter.filled_in_radlib %>
     <% end %><br /><br />
