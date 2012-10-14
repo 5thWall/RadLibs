@@ -9,9 +9,10 @@
 
     <p>
     <%= truncate(template.template, 
-      :omission => "...", :length => 360) %><%= (template.template).scan(/\w+/).size %>
+      :omission => "...", :length => 360) %>
     </p>
     <br /><br />
+    <%= pluralize (template.template).scan(/\w+/).size, "word" %> long<br />
     <%= link_to 'Show', template %> |
     <%= link_to 'Edit', edit_template_path(template) %> |
     <%= link_to 'Fill In!', new_radlib_path(template_id: template) %> |
