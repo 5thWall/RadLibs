@@ -10,8 +10,7 @@
 </p>
 <% end %>
 
-
-<%= link_to 'Edit', edit_radlib_path(@radlib) %> |
+<br />
 <%= link_to 'Back', radlibs_path %>
 <div class="pull-right">
 | <%= pluralize @radlib.reputation_for(:votes).to_i, "vote" %>

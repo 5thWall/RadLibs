@@ -29,13 +29,13 @@
 </ul>
   <% end %>
   <% if user_signed_in? %>
-    <% if current_user.has_role? :admin %>
+ 
     <ul class="nav pull-right">
       <li>
           <%= link_to current_user.name, user_path(current_user) %>
       </li>
       <li><%= link_to current_user.reputation_for(:votes).to_i, user_path(current_user), :class => "rep" %></li>
       </ul>
-    <% end %>
+
   <% end %>
 </ul>
