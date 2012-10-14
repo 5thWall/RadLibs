@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    NoNo (0.0.1)
+      sanitize
     actionmailer (3.2.7)
       actionpack (= 3.2.7)
       mail (~> 2.4.4)
@@ -154,6 +156,8 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.11.0)
     rubyzip (0.9.9)
+    sanitize (2.0.3)
+      nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.1)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -192,6 +196,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  NoNo
   activerecord-reputation-system
   bootstrap-sass (>= 2.1.0.0)
   cancan (>= 1.6.8)
