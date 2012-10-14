@@ -65,18 +65,18 @@
 <br /><br />
 <div class="span3 pull-right sidebar">
 	<h6>Popular Users</h6>
-	<% @toprated.each do |t| %>
-	<%=link_to t.name, user_path(t) %> | <%= link_to t.reputation_for(:votes).to_i, user_path(t) %><br />
+	<% @toprated.each_with_index do |t, n| %>
+	<%= n +1 %>. <%=link_to t.name, user_path(t) %> | <%= t.reputation_for(:votes).to_i %> votes<br />
 	<%end%>
 	<hr>
 	<h6>Popular Radlib Templates</h6>
-	<% @toptemplates.each do |s| %>
-	<%=link_to s.title, template_path(s) %> | <%= link_to s.reputation_for(:votes).to_i, template_path(s) %><br />
+	<% @toptemplates.each_with_index do |s, n| %>
+	<%= n +1 %>. <%=link_to s.title, template_path(s) %> | <%=  s.reputation_for(:votes).to_i %> votes<br />
 	<%end%>
 	<hr>
 	<h6>Popular Radlibs</h6>
-	<% @topradlibs.each do |r| %>
-	<%=link_to r.template.title, radlib_path(r) %> | <%= link_to r.reputation_for(:votes).to_i, radlib_path(r) %><br />
+	<% @topradlibs.each_with_index do |r, n| %>
+	<%= n +1 %>. <%=link_to r.template.title, radlib_path(r) %> | <%=  r.reputation_for(:votes).to_i %> votes<br />
 	<%end%>
 	<hr>
 </div><br />
