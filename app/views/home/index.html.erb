@@ -1,4 +1,16 @@
-<h4>Home</h4>
-<% @users.each do |user| %>
-  <p>User: <%=link_to user.name, user %></p>
-<% end %>
+<div class="span8 pull-left home_main">
+<h4>Welcome to Radlibs</h4>
+
+</div>
+<br /><br />
+<div class="span3 pull-right sidebar">
+	<h6>Popular Users</h6>
+	<% @toprated.each do |t| %>
+	<%=link_to t.name, user_path(current_user) %> | <%= link_to current_user.reputation_for(:votes).to_i, user_path(current_user) %><br />
+	<%end%>
+	<hr>
+	<h6>Popular Templates</h6>
+	<% @toptemplates.each do |s| %>
+	<%=link_to s.title, template_path(s) %> | <%= link_to s.reputation_for(:votes).to_i, template_path(s) %><br />
+	<%end%>
+</div>
