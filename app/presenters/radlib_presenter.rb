@@ -79,7 +79,7 @@ private
 
   def create_numbered_method(name)
     self.class.send(:define_method, name) do
-      "<span data-key='#{name}' data-type='single' contenteditable='true'>#{name}</span>"
+      "<span class='highlight' data-key='#{name}' data-type='single' contenteditable='true'>#{name}</span>"
     end
   end
 
@@ -87,7 +87,7 @@ private
     self.class.send(:define_method, name) do
       @nums ||= Hash.new(-1)
       num = @nums[name] += 1
-      "<span data-key='#{name}' data-type='array' data-index='#{num}' contenteditable='true'>#{name}</span>"
+      "<span class='highlight' data-key='#{name}' data-type='array' data-index='#{num}' contenteditable='true'>#{name}</span>"
     end
   end
 
