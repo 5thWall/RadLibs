@@ -29,6 +29,13 @@ box-shadow: none;
 .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
 box-shadow:none;
 }
+.navbar-fixed-top, .navbar-fixed-bottom {
+position: fixed;
+right: 0;
+left: 0;
+z-index: -1030;
+margin-bottom: 0;
+}
 .container{
 	margin-top: 20px;
 }
@@ -131,14 +138,14 @@ text-align: center;
 	text-decoration:underline;
 }
 .sidebar hr{
-color: #9c9c9c;
-background-color: #9c9c9c;
+color: #dcdcdc;
+background-color: #dcdcdc;
 height: 1px;
 }
 #main{
 	background: url(/assets/shine.png) no-repeat;
-	background-position:0px -100px;
+	background-position:100px -600px;
 	overflow: visible;
-	margin-top: -100px;
-	padding-top:100px;
+	margin-top: -300px;
+	padding-top:300px;
 }

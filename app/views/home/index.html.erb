@@ -1,5 +1,52 @@
 <div class="span8 pull-left home_main">
 <h4>Welcome to Radlibs</h4>
+<hr><hr>
+<h5>Recent Radlib Templates</h5>
+<hr width="250px">
+<% @recenttemplates.each do |template| %>
+    <%if template.created_at >= Time.now - 24.hours%>
+    <div class="itsnew pull-right"></div>
+    <%end%>
+    <h6><%= template.title %></h6>
+
+    <% present template do |presenter| %>
+    <p>
+    <%= presenter.truncated_template_sans_markup %>
+
+    </p>
+    <% end %>
+    <br /><br />
+    <%= pluralize (template.template).scan(/\w+/).size, "word" %> long | <% present template do |presenter| %><%= pluralize presenter.get_words_count, "editable" %><%end%><br />
+    <%= link_to 'View Template', template %> |
+    <%= link_to 'Fill In!', new_radlib_path(template_id: template) %> |
+    <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+    <div class="pull-right">
+    | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
+    <% if current_user && !current_user.voted_for?(template) %>
+      | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
+      | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
+    <% end %>
+	</div>
+  <hr>
+<% end %>
+<hr>
+<h5>Recent Radlibs</h5>
+<hr width="250px">
+
+<% @recentradlibs.each do |radlib| %>
+<h6><%= radlib.template.title %></h6>
+    <% present radlib do |presenter| %>
+    <%= presenter.filled_in_radlib %>
+    <% end %><br /><br />
+
+    <%= link_to 'Show', radlib %> | 
+    <%= link_to 'Edit', edit_radlib_path(radlib) %> | 
+    <%= link_to 'View Template', template_path(radlib.template) %> | 
+    <%= link_to 'Destroy', radlib, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <hr>
+<% end %>
+
 
 </div>
 <br /><br />
@@ -9,8 +56,9 @@
 	<%=link_to t.name, user_path(current_user) %> | <%= link_to current_user.reputation_for(:votes).to_i, user_path(current_user) %><br />
 	<%end%>
 	<hr>
-	<h6>Popular Templates</h6>
+	<h6>Popular Radlib Templates</h6>
 	<% @toptemplates.each do |s| %>
 	<%=link_to s.title, template_path(s) %> | <%= link_to s.reputation_for(:votes).to_i, template_path(s) %><br />
 	<%end%>
+	<hr>
 </div>
