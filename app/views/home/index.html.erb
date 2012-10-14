@@ -83,5 +83,9 @@
 	<%= n +1 %>. <%=link_to r.template.title, radlib_path(r) %> | <%=  r.reputation_for(:votes).to_i %> votes<br />
 	<%end%>
 	<hr>
-  <%= link_to "About Us", "/aboutus" %>
+  <ul>
+    <li><%= link_to "About Us", "/aboutus" %></li>
+    <li><%= link_to "Dev Blog", "http://radlibsdev.tumblr.com" %></li>
+  </ul>
+
 </div><br />
