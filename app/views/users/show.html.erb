@@ -2,42 +2,53 @@
 <%= link_to @user.reputation_for(:votes).to_i, user_path(@user), :class => "rep2" %>
 
 <hr>
-<h5>Radlib Templates:</h5>
-<hr>
-<% @user.templates.each do |template| %>
-    <h6><%= template. title %></h6>
-    <p>
-    <%= truncate(template.template, 
-      :omission => "...", :length => 240) %>
-    </p>
-    <br />
-    <%= link_to 'Show', template %> |
-    <%= link_to 'Edit', edit_template_path(template) %> |
-    <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
-    
-    <div class="pull-right">
-    | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
-    <% if current_user && !current_user.voted_for?(template) %>
-      | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
-      | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
-    <% end %>
-	</div>
-  <hr>
-<% end %>
 
-<h5>Filled-Out Radlibs:</h5>
-<hr>
-<% @user.radlibs.each do |radlib| %>
-    <h6><%= radlib.template.title %></h6>
-    <p>
-   <% present radlib do |presenter| %>
-   <%= presenter.filled_in_radlib %>
-   <% end %>
-    </p>
-    <br />
-    <%= link_to 'Show', radlib %> |
-    <%= link_to 'Edit', edit_template_path(radlib) %> |
-    <%= link_to 'Destroy', radlib, method: :delete, data: { confirm: 'Are you sure?' } %>
- 
-  <hr>
-<% end %>
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab"><h5>Radlib Templates</h5></a></li>
+    <li><a href="#tab2" data-toggle="tab"><h5>Filled-Out Radlibs</h5></a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+      <% @user.templates.each do |template| %>
+          <h6><%= template. title %></h6>
+          <p>
+          <%= truncate(template.template, 
+            :omission => "...", :length => 240) %>
+          </p>
+          <br />
+          <%= link_to 'Show', template %> |
+          <%= link_to 'Edit', edit_template_path(template) %> |
+          <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
+          
+          <div class="pull-right">
+          | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
+          <% if current_user && !current_user.voted_for?(template) %>
+            | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
+            | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
+          <% end %>
+      	</div>
+        <hr>
+      <% end %>
+      
+    </div>
+    <div class="tab-pane" id="tab2">
+      <% @user.radlibs.each do |radlib| %>
+          <h6><%= radlib.template.title %></h6>
+          <p>
+         <% present radlib do |presenter| %>
+         <%= presenter.filled_in_radlib %>
+         <% end %>
+          </p>
+          <br />
+          <%= link_to 'Show', radlib %> |
+          <%= link_to 'Edit', edit_template_path(radlib) %> |
+          <%= link_to 'Destroy', radlib, method: :delete, data: { confirm: 'Are you sure?' } %>
+       
+        <hr>
+      <% end %>
+      
+    </div>
+  </div>
+</div>
+
