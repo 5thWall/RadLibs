@@ -1,5 +1,10 @@
 Radlibs5::Application.routes.draw do
-  resources :radlibs
+
+  resources :radlibs do
+  	member do
+  		post :vote
+  	end
+  end
 
   resources :templates do
   	member do

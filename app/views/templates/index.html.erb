@@ -26,7 +26,7 @@
 
     <div class="pull-right">
     | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
-    <% if current_user && !current_user.voted_for?(template) %>
+    <% if current_user && !current_user.voted_for_template?(template) %>
       | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
       | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
     <% end %>
