@@ -25,7 +25,7 @@ private
   DELIMETER_END = /\}\}/    # /\}/
 
   def escaped_template
-    template = sanitized_template DELIMITER_START, '{{{'
+    template = sanitized_template.gsub DELIMITER_START, '{{{'
     template.gsub DELIMETER_END, '}}}'
   end
 
