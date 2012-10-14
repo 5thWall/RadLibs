@@ -19,7 +19,7 @@
     </p>
     <% end %>
     <br /><br />
-    <%= pluralize (template.template).scan(/\w+/).size, "word" %> long | <% present template do |presenter| %><%= pluralize presenter.get_words_count, "editable" %><%end%><br />
+    <%= pluralize (template.template).scan(/\w+/).size, "word" %> | <% present template do |presenter| %><%= pluralize presenter.get_words_count, "editable" %><%end%><br />
     <%= link_to 'View Template', template %> |
     <%= link_to 'Fill In!', new_radlib_path(template_id: template) %> |
     <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -66,7 +66,7 @@
 <div class="span3 pull-right sidebar">
 	<h6>Popular Users</h6>
 	<% @toprated.each do |t| %>
-	<%=link_to t.name, user_path(current_user) %> | <%= link_to current_user.reputation_for(:votes).to_i, user_path(current_user) %><br />
+	<%=link_to t.name, user_path(t) %> | <%= link_to t.reputation_for(:votes).to_i, user_path(t) %><br />
 	<%end%>
 	<hr>
 	<h6>Popular Radlib Templates</h6>

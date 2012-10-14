@@ -19,7 +19,7 @@
     </p>
     <% end %>
     <br /><br />
-    <%= pluralize (template.template).scan(/\w+/).size, "word" %> long | <% present template do |presenter| %><%= pluralize presenter.get_words_count, "editable" %><%end%><br />
+    <%= pluralize (template.template).scan(/\w+/).size, "word" %> | <% present template do |presenter| %><%= pluralize presenter.get_words_count, "editable" %><%end%><br />
     <%= link_to 'View Template', template %> |
     <%= link_to 'Fill In!', new_radlib_path(template_id: template) %> |
     <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
