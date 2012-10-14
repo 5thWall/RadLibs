@@ -3,8 +3,6 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  console.log "ready"
-
   if $ 'form#new_radlib'
     setup_new()
 
