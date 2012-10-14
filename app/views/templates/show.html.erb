@@ -10,9 +10,11 @@
   <%= @template. title %>
 </h4>
 
+<% present @template do |presenter| %>
 <p>
-  <%=Mustache.render (@template.template), @words %>
+<%= presenter.template_sans_markup %>
 </p>
+<% end %>
 <br />
 
 <%= link_to 'Edit', edit_template_path(@template) %> |

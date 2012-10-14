@@ -12,10 +12,11 @@
     <%end%>
     <h5><%= template.title %></h5>
 
+    <% present template do |presenter| %>
     <p>
-    <%= truncate(template.template, 
-      :omission => "...", :length => 360) %>
+    <%= presenter.truncated_template_sans_markup %>
     </p>
+    <% end %>
     <br /><br />
     <%= pluralize (template.template).scan(/\w+/).size, "word" %> long<br />
     <%= link_to 'Show', template %> |
