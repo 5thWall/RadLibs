@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag "radlibs", :media => "all" %>
 <h3>Radlibs</h3>
 <hr />
 <% @radlibs.each do |radlib| %>
@@ -10,9 +9,9 @@
     <%= presenter.filled_in_radlib %>
     <% end %><br /><br />
 
-    <%= link_to 'Show', radlib %> | 
+    <%= link_to 'Show', radlib %> |
     <%= link_to 'View Template', template_path(radlib.template) %>
-    
+
     <div class="pull-right">
     | <%= pluralize radlib.reputation_for(:votes).to_i, "vote" %>
     <% if current_user && !current_user.voted_for_radlib?(radlib) %>
