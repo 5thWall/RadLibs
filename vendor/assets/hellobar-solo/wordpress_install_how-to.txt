@@ -1,0 +1,1 @@
+HELLO BAR SOLO WORDPRESS INSTALLATION GUIDEFollow the steps at the link below to install Hello Bar Solo to your Wordpress site:http://www.hellobar.com/blog/hello-bar-solo-wordpress-installation

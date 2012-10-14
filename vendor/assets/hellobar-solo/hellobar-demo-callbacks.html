@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<title>Hello Bar Solo Demo</title>
+	<meta name="description" content=" " />
+	<meta name="keywords" content=" " />
+	<meta http-equiv="Content-Language" content="en-gb" />
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+	<link rel="stylesheet" type="text/css" href="demo-assets/css/style.css" />
+	
+	<!-- Start of the Styles and Scripts for Hello Bar Solo -->
+	<link type="text/css" rel="stylesheet" href="hellobar-solo/hellobar.css" />
+	<script type="text/javascript" src="hellobar-solo/hellobar.js"></script>
+	<!-- End of the Styles and Scripts for Hello Bar Solo -->
+	
+	<!-- 
+	Scroll to the bottom of the page to configure the Hello Bar!
+						
+							___ 
+						   |   |
+						   |   |
+						   |   |
+						   |   |
+						   |   |
+						 __!   !__
+						 \       /
+						  \     /
+						   \   /
+							\ /
+							 Y
+
+	-->
+	
+</head>
+<body>
+
+<div id="container">
+
+	<div id="headercont">
+		<div id="logo">
+			<p>Hello Bar Solo Callbacks</p>
+		</div>
+	</div>
+	
+	<h2>When the Hello Bar opens, an alert box will appear. This can be any JavaScript callback function.</h2>
+	
+</div>
+
+
+<!-- Hello Bar configuration start -->
+<script type="text/javascript">
+    new HelloBar( 'This Hello Bar takes advantage of the afterOpen callback.', {
+		showWait: 2000, // two seconds
+		forgetful: true,
+		//barColor: '#333333',
+		afterOpen: function( hellobar, options ){
+			// Here we are opening an alert() dialog box and taking 
+			// advantage of the callback parameters.
+			alert( hellobar.message + " and it's bar color is: " + options.barColor );
+		}
+	}, 1.0 );
+</script>
+<!-- Hello Bar configuration end -->
+
+
+
+</body>
+</html>
