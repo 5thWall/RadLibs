@@ -10,7 +10,7 @@
     <%= yield(:head) %>
   </head>
   <body>
-    <header class="navbar navbar-fixed-top">
+    <header class="navbar navbar-static-top">
       <nav class="navbar-inner">
         <div class="container">
           <%= render 'layouts/navigation' %>
@@ -29,12 +29,13 @@
               </div>
               <%= yield %>
             </div>
+            
           </div>
          
         </div> 
         <footer class="footerinfo">
         </footer>
       </div> <!--! end of .container -->
-    </div> <!--! end of #main -->
+    </div> <!--! end of #main --><br /><br />
   </body>
 </html>
