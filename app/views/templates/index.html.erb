@@ -10,7 +10,7 @@
     <%if template.created_at >= Time.now - 24.hours%>
     <div class="itsnew pull-right"></div>
     <%end%>
-    <h5><%= template.title %></h5>
+    <h6><%= template.title %></h6>
 
     <% present template do |presenter| %>
     <p>
@@ -34,7 +34,4 @@
   <hr>
 <% end %>
 <br />
-<br />
-<% if user_signed_in? %>
-<%= link_to '+ New Template', new_template_path %>
-<% end %>
+
