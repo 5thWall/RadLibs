@@ -15,12 +15,12 @@
     <% present template do |presenter| %>
     <p>
     <%= presenter.truncated_template_sans_markup %>
-    <%= presenter.get_words_count %>
+    
     </p>
     <% end %>
     <br /><br />
-    <%= pluralize (template.template).scan(/\w+/).size, "word" %> long<br />
-    <%= link_to 'Show', template %> |
+    <%= pluralize (template.template).scan(/\w+/).size, "word" %> long | <% present template do |presenter| %><%= pluralize presenter.get_words_count, "editable" %><%end%><br />
+    <%= link_to 'Show', template %> 
     <%= link_to 'Edit', edit_template_path(template) %> |
     <%= link_to 'Fill In!', new_radlib_path(template_id: template) %> |
     <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
