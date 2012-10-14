@@ -13,8 +13,11 @@
       <% @user.templates.each do |template| %>
           <h6><%= template. title %></h6>
           <p>
-          <%= truncate(template.template, 
-            :omission => "...", :length => 240) %>
+         <% present template do |presenter| %>
+         <p>
+         <%= presenter.truncated_template_sans_markup %>
+         </p>
+         <% end %>         <br />
           </p>
           <br />
           <%= link_to 'Show', template %> |
