@@ -44,6 +44,7 @@ class RadlibsController < ApplicationController
     @radlib = Radlib.new(params[:radlib])
 
     if @radlib.save
+    current_user.radlibs << @radlib
       redirect_to @radlib, notice: 'Radlib was successfully created.'
     else
       render action: "new"

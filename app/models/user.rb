@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   attr_accessible :provider, :uid, :name, :email
   
   has_many :templates
+  has_many :radlibs
   
   has_many :evaluations, class_name: "RSEvaluation", as: :source
   
