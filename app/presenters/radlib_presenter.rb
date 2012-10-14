@@ -34,7 +34,7 @@ private
   end
 
   def sanitized_template
-    template = @template.template
+    template = @radlib.template.template
     template = template.gsub /\{\{\{/, '{{'
     template = template.gsub /\}\}\}/, '}}'
     template = template.gsub /\{\{(.*?)\}\}/ do |match|
