@@ -18,4 +18,5 @@ Radlibs5::Application.routes.draw do
   match '/signin' => 'sessions#new', :as => :signin
   match '/signout' => 'sessions#destroy', :as => :signout
   match '/auth/failure' => 'sessions#failure'
+  match '/aboutus' => "home#aboutus"
 end

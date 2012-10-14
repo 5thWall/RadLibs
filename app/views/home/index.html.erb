@@ -9,7 +9,7 @@
 
 <hr width="250px">
 <% @recenttemplates.each do |template| %>
-    
+
     <h6><%= template.title %></h6>
 	<h7 class="pull-left name_push"><%= template.user.name %></h7>
     <% present template do |presenter| %>
@@ -20,7 +20,7 @@
     <% end %>
     <br /><br />
     <%= pluralize (template.template).scan(/\w+/).size, "word" %> | <% present template do |presenter| %><%= pluralize presenter.get_words_count, "editable" %><%end%><br />
-    <%= link_to 'View Template', template %> 
+    <%= link_to 'View Template', template %>
     <% if user_signed_in?%>
      | <%= link_to 'Fill out!', new_radlib_path(template_id: template) %>
     <%end%>
@@ -47,7 +47,7 @@
     <%= presenter.filled_in_radlib %>
     <% end %><br /><br />
 
-    <%= link_to 'Show', radlib %> | 
+    <%= link_to 'Show', radlib %> |
     <%= link_to 'View Template', template_path(radlib.template) %>
     <div class="pull-right">
         | <%= pluralize radlib.reputation_for(:votes).to_i, "vote" %>
@@ -56,7 +56,7 @@
           | <%= link_to "down", vote_radlib_path(radlib, type: "down"), method: "post" %>
         <% end %>
         </div>
-    
+
   <hr>
 <% end %>
 
@@ -79,4 +79,5 @@
 	<%= n +1 %>. <%=link_to r.template.title, radlib_path(r) %> | <%=  r.reputation_for(:votes).to_i %> votes<br />
 	<%end%>
 	<hr>
+  <%= link_to "About Us", "/aboutus" %>
 </div><br />
