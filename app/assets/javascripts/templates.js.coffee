@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  if $ 'form#new_template'
+  if $('form#new_template').lenght > 0
     setup_new()
 
 setup_new = ->

@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  if $ 'form#new_radlib'
+  if $('form#new_radlib').length > 0
     setup_new()
 
 setup_new = (form) ->
@@ -29,8 +29,6 @@ setup_new = (form) ->
   $("span[contenteditable='true']").each ->
     $(@).focus ->
       orig_txt = $(@).text()
-      console.log $(@)
-      console.log $(@).text()
       $(@).data 'orig', $(@).text()
 
     $(@).blur ->
