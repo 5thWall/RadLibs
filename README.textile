@@ -1,4 +1,11 @@
 h1. Radlibs!
+
 Create [adjective] stories to [verb] with your [noun]!
 
+h2. Configure
 
+Copy application.example.yml to application.yml and enter the required
+configuration keys:
+
+ - TWITTER_KEY
+ - TWITTER_SECRET

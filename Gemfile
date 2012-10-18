@@ -27,3 +27,4 @@ gem "rolify", ">= 3.2.0"
 gem "simple_form", ">= 2.0.4"
 gem "mustache"
 gem 'activerecord-reputation-system', require: 'reputation_system'
+gem 'figaro'

@@ -1,0 +1,5 @@
+# Add application configuration variables here
+#  Copy this file to application.yml and fill in the keys
+
+TWITTER_KEY: #twitter_key
+TWITTER_SECRET: #twitter_secret

@@ -74,6 +74,8 @@ GEM
       railties (>= 3.0.0)
     ffi (1.1.5)
     ffi (1.1.5-x86-mingw32)
+    figaro (0.4.1)
+      rails (~> 3.0)
     gherkin (2.11.4)
       json (>= 1.4.6)
     gherkin (2.11.4-x86-mingw32)
@@ -201,6 +203,7 @@ DEPENDENCIES
   database_cleaner (>= 0.9.1)
   email_spec (>= 1.2.1)
   factory_girl_rails (>= 4.1.0)
+  figaro
   hominid (>= 3.0.5)
   jquery-rails
   launchy (>= 2.1.2)
