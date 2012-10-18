@@ -14,12 +14,15 @@
 <br />
 
 <%= link_to 'Back', templates_path %> |
-<%= link_to 'Fill Out!', new_radlib_path(template_id: @template) %><div class="pull-right">
-| <%= pluralize @template.reputation_for(:votes).to_i, "vote" %>
-<% if current_user && current_user.voted_for_template?(@template) %>
-  | <%= link_to "up", vote_template_path(@template, type: "up"), method: "post" %>
-  | <%= link_to "down", vote_template_path(@template, type: "down"), method: "post" %>
+<% if user_signed_in? %>
+<%= link_to 'Fill Out!', new_radlib_path(template_id: @template) %>
 <% end %>
+<div class="pull-right">
+  | <%= pluralize @template.reputation_for(:votes).to_i, "vote" %>
+  <% if current_user && current_user.voted_for_template?(@template) %>
+    | <%= link_to "up", vote_template_path(@template, type: "up"), method: "post" %>
+    | <%= link_to "down", vote_template_path(@template, type: "down"), method: "post" %>
+  <% end %>
 </div>
 <hr>
 <% @template.radlibs.each_with_index do |radlib, n|%>

@@ -3,22 +3,21 @@ class RadlibsController < ApplicationController
   # GET /radlibs.json
   def index
     @radlibs = Radlib.find(:all, :order => "created_at desc")
-
   end
 
   # GET /radlibs/1
   # GET /radlibs/1.json
   def show
     @radlib = Radlib.find(params[:id])
-
   end
 
   # GET /radlibs/new
   # GET /radlibs/new.json
   def new
+    redirect_to root_url, alert: 'Please log in before doing that' unless current_user
+
     @template = Template.find params[:template_id]
     @radlib = @template.radlibs.build
-
   end
 
   # GET /radlibs/1/edit
@@ -29,6 +28,8 @@ class RadlibsController < ApplicationController
   # POST /radlibs
   # POST /radlibs.json
   def create
+    redirect_to root_url, alert: "Please log in before doing that" unless current_user
+
     @radlib = Radlib.new(params[:radlib])
 
     if @radlib.save
@@ -57,9 +58,7 @@ class RadlibsController < ApplicationController
     @radlib = Radlib.find(params[:id])
     @radlib.destroy
 
-
     redirect_to radlibs_url
-
   end
 
   def vote
@@ -68,6 +67,4 @@ class RadlibsController < ApplicationController
     @radlib.add_or_update_evaluation(:votes, value, current_user)
     redirect_to :back, notice: "Thank you for voting."
   end
-
 end
-
