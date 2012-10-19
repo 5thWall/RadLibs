@@ -1,7 +1,7 @@
 <% content_for :title do %>Viewing Radlibs Templates<% end %>
 
 <h3>Radlib Templates</h3>
-<% if user_signed_in? %>
+<% if can? :create, Template %>
   <div>
   <%= link_to '+ New Template', new_template_path %>
   </div>
@@ -29,7 +29,7 @@
 
   <%= link_to 'View Template', template %> |
 
-  <% if user_signed_in?%>
+  <% if user_signed_in? %>
   <%= link_to 'Fill out!', new_radlib_path(template_id: template) %>
   <% end %>
 
