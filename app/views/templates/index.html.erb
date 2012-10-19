@@ -2,38 +2,45 @@
 
 <h3>Radlib Templates</h3>
 <% if user_signed_in? %>
-<div>
-<%= link_to '+ New Template', new_template_path %>
-</div>
+  <div>
+  <%= link_to '+ New Template', new_template_path %>
+  </div>
 <% end %>
 <hr>
 
 <% @templates.each do |template| %>
-    <%if template.created_at >= Time.now - 24.hours%>
-    <div class="itsnew pull-right"></div>
-    <%end%>
-    <h6><%= template.title %></h6>
-    <h7>By: <%= template.user.name %></h7><br /><br />
-    <% present template do |presenter| %>
-    <p>
-    <%= presenter.truncated_template_sans_markup %>
+  <%if template.created_at >= Time.now - 24.hours%>
+  <div class="itsnew pull-right"></div>
+  <%end%>
 
-    </p>
-    <% end %>
-    <br /><br />
-    <%= pluralize (template.template).scan(/\w+/).size, "word" %> | <% present template do |presenter| %><%= pluralize presenter.get_words_count, "editable" %><%end%><br />
-    <%= link_to 'View Template', template %> |
-    <% if user_signed_in?%>
-    <%= link_to 'Fill out!', new_radlib_path(template_id: template) %>
-    <% end %>
+  <h6><%= template.title %></h6>
+  <h7>By: <%= template.user.name %></h7><br /><br />
 
-    <div class="pull-right">
+  <% present template do |presenter| %>
+  <p><%= presenter.truncated_template_sans_markup %></p>
+  <% end %>
+  <br /><br />
+
+  <%= pluralize (template.template).scan(/\w+/).size, "word" %> |
+
+  <% present template do |presenter| %>
+    <%= pluralize presenter.get_words_count, "editable" %>
+  <%end%><br />
+
+  <%= link_to 'View Template', template %> |
+
+  <% if user_signed_in?%>
+  <%= link_to 'Fill out!', new_radlib_path(template_id: template) %>
+  <% end %>
+
+  <div class="pull-right">
     | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
+
     <% if current_user && !current_user.voted_for_template?(template) %>
-      | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
-      | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
+    | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
+    | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
     <% end %>
-	</div>
+  </div>
   <hr>
 <% end %>
 <br />

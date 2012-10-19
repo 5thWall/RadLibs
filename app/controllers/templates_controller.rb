@@ -1,6 +1,5 @@
 class TemplatesController < ApplicationController
-  load_and_authorize_resource except: :index
-  skip_authorize_resource only: :show
+  load_and_authorize_resource
 
   def index
     @templates = Template.find(:all, :order => "created_at desc")
