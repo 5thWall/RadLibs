@@ -1,7 +1,7 @@
 <% content_for :title do %>Viewing Radlibs Templates<% end %>
 
 <h3>Radlib Templates</h3>
-<% if can? :create, Template %>
+<% if can? :create, ::Template %>
   <div>
   <%= link_to '+ New Template', new_template_path %>
   </div>
