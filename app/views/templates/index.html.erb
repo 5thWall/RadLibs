@@ -29,7 +29,7 @@
 
   <%= link_to 'View Template', template %> |
 
-  <% if user_signed_in? %>
+  <% if can? :create, Radlib %>
   <%= link_to 'Fill out!', new_radlib_path(template_id: template) %>
   <% end %>
 

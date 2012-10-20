@@ -14,7 +14,7 @@
 <br />
 
 <%= link_to 'Back', templates_path %> |
-<% if user_signed_in? %>
+<% if can? :create, Radlib %>
 <%= link_to 'Fill Out!', new_radlib_path(template_id: @template) %>
 <% end %>
 <div class="pull-right">
