@@ -10,6 +10,7 @@ class Ability
       can :manage, :all
     else
       can :create, Template
+      can :create, Radlib
     end
   end
 end
