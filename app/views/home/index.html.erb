@@ -1,91 +1,109 @@
 <% content_for :title do %>Create Adjective stories to Verb with your Nouns!<% end %>
 
 <div class="span8 pull-left home_main">
-<h4>Welcome to Radlibs</h4>
-<hr>
-<h7 id="tagline">
-  <strong>Create <span contenteditable="true" class="highlight" onclick="document.execCommand('selectAll',false,null)">Adjective</span> stories to <span contenteditable="true" class="highlight" onclick="document.execCommand('selectAll',false,null)">Verb</span> with your <span contenteditable="true" class="highlight" onclick="document.execCommand('selectAll',false,null)">Nouns</span>!</strong>
-</h7>
-<hr>
-<h5>Recent Radlib Templates</h5>
+  <h4>Welcome to Radlibs</h4>
+  <hr>
 
-<div class="itsnew"></div>
+  <h7 id="tagline">
+    <strong>Create <span contenteditable="true" class="highlight" onclick="document.execCommand('selectAll',false,null)">Adjective</span> stories to <span contenteditable="true" class="highlight" onclick="document.execCommand('selectAll',false,null)">Verb</span> with your <span contenteditable="true" class="highlight" onclick="document.execCommand('selectAll',false,null)">Nouns</span>!</strong>
+  </h7>
+  <hr>
 
-<hr width="250px">
-<% @recenttemplates.each do |template| %>
+  <h5>Recent Radlib Templates</h5>
 
+  <div class="itsnew"></div>
+  <hr width="250px">
+
+  <% @recenttemplates.each do |template| %>
     <h6><%= template.title %></h6>
-	<h7 class="pull-left name_push"><%= template.user.name %></h7>
+  	<h7 class="pull-left name_push"><%= template.user.name %></h7>
     <% present template do |presenter| %>
-    <p>
-    <%= presenter.truncated_template_sans_markup %>
-
-    </p>
+      <p><%= presenter.truncated_template_sans_markup %></p>
     <% end %>
     <br /><br />
-    <%= pluralize (template.template).scan(/\w+/).size, "word" %> | <% present template do |presenter| %><%= pluralize presenter.get_words_count, "editable" %><%end%><br />
+
+    <%= pluralize (template.template).scan(/\w+/).size, "word" %> |
+    <% present template do |presenter| %>
+      <%= pluralize presenter.get_words_count, "editable" %>
+    <%end%>
+    <br />
+
     <%= link_to 'View Template', template %>
     <% if user_signed_in?%>
      | <%= link_to 'Fill out!', new_radlib_path(template_id: template) %>
     <%end%>
 
-
     <div class="pull-right">
-    | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
-    <% if current_user && !current_user.voted_for_template?(template) %>
-      | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
-      | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
-    <% end %>
-	</div>
+      | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
+      <% if current_user && !current_user.voted_for_template?(template) %>
+        | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
+        | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
+      <% end %>
+  	</div>
+    <hr>
+  <% end %>
   <hr>
-<% end %>
-<hr>
-<h5>Recent Radlibs</h5>
-<div class="itsnew"></div>
-<hr width="250px">
 
-<% @recentradlibs.each do |radlib| %>
-<h6><%= radlib.template.title %></h6>
-<h7 class="pull-left name_push"><%= radlib.user.name %></h7>
+  <h5>Recent Radlibs</h5>
+  <div class="itsnew"></div>
+  <hr width="250px">
+
+  <% @recentradlibs.each do |radlib| %>
+    <h6><%= radlib.template.title %></h6>
+    <h7 class="pull-left name_push"><%= radlib.user.name %></h7>
     <% present radlib do |presenter| %>
-    <%= presenter.filled_in_radlib %>
+      <%= presenter.filled_in_radlib %>
     <% end %><br /><br />
 
     <%= link_to 'Show', radlib %> |
     <%= link_to 'View Template', template_path(radlib.template) %>
+
     <div class="pull-right">
-        | <%= pluralize radlib.reputation_for(:votes).to_i, "vote" %>
-        <% if current_user && !current_user.voted_for_radlib?(radlib) %>
-          | <%= link_to "up", vote_radlib_path(radlib, type: "up"), method: "post" %>
-          | <%= link_to "down", vote_radlib_path(radlib, type: "down"), method: "post" %>
-        <% end %>
-        </div>
-
-  <hr>
-<% end %>
-
-
+      | <%= pluralize radlib.reputation_for(:votes).to_i, "vote" %>
+      <% if current_user && !current_user.voted_for_radlib?(radlib) %>
+        | <%= link_to "up", vote_radlib_path(radlib, type: "up"), method: "post" %>
+        | <%= link_to "down", vote_radlib_path(radlib, type: "down"), method: "post" %>
+      <% end %>
+    </div>
+    <hr>
+  <% end %>
 </div>
 <br /><br />
+
 <div class="span3 pull-right sidebar">
 	<h6>Popular Users</h6>
-	<% @toprated.each_with_index do |t, n| %>
-	<%= n +1 %>. <%=link_to t.name, user_path(t) %> | <%= t.reputation_for(:votes).to_i %> votes<br />
+
+  <% @toprated.each_with_index do |t, n| %>
+  	<%= n +1 %>.
+    <%=link_to t.name, user_path(t) %> |
+    <%= t.reputation_for(:votes).to_i %> votes
+    <br />
 	<%end%>
 	<hr>
+
 	<h6>Popular Radlib Templates</h6>
-	<% @toptemplates.each_with_index do |s, n| %>
-	<%= n +1 %>. <%=link_to s.title, template_path(s) %> | <%=  s.reputation_for(:votes).to_i %> votes<br />
+
+  <% @toptemplates.each_with_index do |s, n| %>
+  	<%= n +1 %>.
+    <%=link_to s.title, template_path(s) %> |
+    <%=  s.reputation_for(:votes).to_i %> votes
+    <br />
 	<%end%>
 	<hr>
+
 	<h6>Popular Radlibs</h6>
-	<% @topradlibs.each_with_index do |r, n| %>
-	<%= n +1 %>. <%=link_to r.template.title, radlib_path(r) %> | <%=  r.reputation_for(:votes).to_i %> votes<br />
+
+  <% @topradlibs.each_with_index do |r, n| %>
+  	<%= n +1 %>.
+    <%=link_to r.template.title, radlib_path(r) %> |
+    <%=  r.reputation_for(:votes).to_i %> votes
+    <br />
 	<%end%>
 	<hr>
+
   <ul>
     <li><%= link_to "About Us", "/aboutus" %></li>
     <li><%= link_to "Dev Blog", "http://radlibsdev.tumblr.com" %></li>
   </ul>
-
-</div><br />
+</div>
+<br />

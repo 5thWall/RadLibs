@@ -2,9 +2,7 @@
 
 <p id="notice"><%= notice %></p>
 
-<h4>
-  <%= @template. title %>
-</h4>
+<h4><%= @template. title %></h4>
 
 <% present @template do |presenter| %>
   <p><%= presenter.template_sans_markup %></p>
@@ -26,13 +24,11 @@
 <hr>
 
 <% @template.radlibs.each_with_index do |radlib, n|%>
-    <h6 class="pull-left titlehalf"><%= n + 1%>. <%= radlib.user.name %><br />
-      <div class="pull-left"><%= link_to "Read", radlib_path(radlib) %></div></h6>
+  <h6 class="pull-left titlehalf"><%= n + 1%>. <%= radlib.user.name %><br />
+    <div class="pull-left"><%= link_to "Read", radlib_path(radlib) %></div></h6>
 
   <% present radlib do |presenter| %>
-    <p>
-      <%= presenter.filled_in_radlib %>
-    </p>
+    <p><%= presenter.filled_in_radlib %></p>
 
     <div class="pull-right">
       | <%= pluralize radlib.reputation_for(:votes).to_i, "vote" %>
