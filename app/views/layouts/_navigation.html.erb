@@ -2,8 +2,11 @@
 <%= link_to image_tag( 'logo_hover.png'), root_path, :class => 'brand2' %>
 
 <ul class="nav">
-  <% if user_signed_in? %>
+  <% if can? :read, Template %>
     <li><%= link_to 'Templates', templates_path %></li>
+  <% end %>
+
+  <% if can? :read, Radlib %>
     <li><%= link_to 'Radlibs', radlibs_path %></li>
   <% end %>
 </ul>
