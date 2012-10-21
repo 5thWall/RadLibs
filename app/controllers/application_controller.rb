@@ -6,11 +6,7 @@ class ApplicationController < ActionController::Base
 
   private
     def current_user
-      begin
-        @current_user ||= User.find(session[:user_id]) if session[:user_id]
-      rescue Mongoid::Errors::DocumentNotFound
-        nil
-      end
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
     end
 
     def user_signed_in?
@@ -29,7 +25,6 @@ class ApplicationController < ActionController::Base
         redirect_to root_url, :alert => 'You need to sign in for access to this page.'
       end
     end
-
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message

@@ -1,21 +1,20 @@
 <% content_for :title do "#{@radlib.template.title} by #{@radlib.user.name}" end %>
+
 <p>
   <h3><%= @radlib.template.title %></h3>
   <h4>Filled in by: <%= @radlib.user.name %></h4>
 </p>
 
 <% present @radlib do |presenter| %>
-<p>
-  <%= presenter.filled_in_radlib %>
-</p>
+  <p><%= presenter.filled_in_radlib %></p>
 <% end %>
-
 <br />
+
 <%= link_to 'Back', radlibs_path %>
 <div class="pull-right">
-| <%= pluralize @radlib.reputation_for(:votes).to_i, "vote" %>
-<% if current_user && !current_user.voted_for_radlib?(@radlib) %>
-  | <%= link_to "up", vote_radlib_path(@radlib, type: "up"), method: "post" %>
-  | <%= link_to "down", vote_radlib_path(@radlib, type: "down"), method: "post" %>
-<% end %>
+  | <%= pluralize @radlib.reputation_for(:votes).to_i, "vote" %>
+  <% if current_user && !current_user.voted_for_radlib?(@radlib) %>
+    | <%= link_to "up", vote_radlib_path(@radlib, type: "up"), method: "post" %>
+    | <%= link_to "down", vote_radlib_path(@radlib, type: "down"), method: "post" %>
+  <% end %>
 </div>
