@@ -11,34 +11,7 @@
   <div class="itsnew"></div>
   <hr width="250px">
 
-  <% @recenttemplates.each do |template| %>
-    <h6><%= template.title %></h6>
-  	<h7 class="pull-left name_push"><%= template.user.name %></h7>
-    <% present template do |presenter| %>
-      <p><%= presenter.truncated_template_sans_markup %></p>
-    <% end %>
-    <br /><br />
-
-    <%= pluralize (template.template).scan(/\w+/).size, "word" %> |
-    <% present template do |presenter| %>
-      <%= pluralize presenter.get_words_count, "editable" %>
-    <%end%>
-    <br />
-
-    <%= link_to 'View Template', template %>
-    <% if user_signed_in?%>
-     | <%= link_to 'Fill out!', new_radlib_path(template_id: template) %>
-    <%end%>
-
-    <div class="pull-right">
-      | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
-      <% if current_user && !current_user.voted_for_template?(template) %>
-        | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
-        | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
-      <% end %>
-  	</div>
-    <hr>
-  <% end %>
+  <%= render partial: 'templates/template', collection: @recenttemplates %>
   <hr>
 
   <h5>Recent Radlibs</h5>
