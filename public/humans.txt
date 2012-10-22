@@ -3,6 +3,10 @@
 
 
 /* TEAM */
+  Developer: Andy Arminio
+  Twitter: @5thWall
+  Location: Flagstaff, AZ
+
   <your title>: <your name>
   Site:
   Twitter:
