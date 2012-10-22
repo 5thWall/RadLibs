@@ -5,7 +5,7 @@ class RadlibPresenter
   end
 
   def filled_in_radlib
-    words = RadlibDisplay.new JSON.parse(@radlib.words)
+    words = RadlibDisplay.new words_data
     words.render unescaped_template
   end
 
@@ -25,12 +25,38 @@ private
   DELIMETER_END = /\}\}/    # /\}/
 
   def escaped_template
-    template = @radlib.template.template.gsub DELIMITER_START, '{{{'
+    template = sanitized_template.gsub DELIMITER_START, '{{{'
     template.gsub DELIMETER_END, '}}}'
   end
 
   def unescaped_template
-    @radlib.template.template
+    sanitized_template
+  end
+
+  def sanitized_template
+    template = @radlib.template.template
+    template = template.gsub /\{\{\{/, '{{'
+    template = template.gsub /\}\}\}/, '}}'
+    template = template.gsub /\{\{(.*?)\}\}/ do |match|
+      str = $1.split(' ').join('_')
+      "{{#{str}}}"
+    end
+    template = template.gsub /\{\{[\#\/\^\=]/, '{{'
+    template.gsub /\=\}\}/, '}}'
+  end
+
+  def words_data
+    begin
+      JSON.parse @radlib.words
+    rescue
+      { "Adjective" => ["pretty", "stupid", "ugly", "bitchin'", "shiny", "user-centric", "subtle", "default"],
+        "adjective" => ["pretty", "stupid", "ugly", "bitchin'", "shiny", "user-centric", "subtle", "default"],
+        "Verb" => ["share", "kill", "run", "code"],
+        "verb" => ["share", "kill", "run", "code"],
+        "Noun" => ["Princess", "dog", "friends", "code", "Internet"],
+        "noun" => ["pony", "unicorn", "Rails Rumble 2012"]
+      }
+    end
   end
 end
 

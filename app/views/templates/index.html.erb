@@ -1,40 +1,45 @@
+<% content_for :title do %>Viewing Radlibs Templates<% end %>
+
 <h3>Radlib Templates</h3>
-<% if user_signed_in? %>
-<div>
-<%= link_to '+ New Template', new_template_path %>
+
+<% if can? :create, ::Template %>
+  <div><%= link_to '+ New Template', new_template_path %></div>
 <% end %>
-</div>
 <hr>
 
 <% @templates.each do |template| %>
-    <%if template.created_at >= Time.now - 24.hours%>
+  <%if template.created_at >= Time.now - 24.hours%>
     <div class="itsnew pull-right"></div>
-    <%end%>
-    <h5><%= template.title %></h5>
+  <%end%>
 
-    <% present template do |presenter| %>
-    <p>
-    <%= presenter.truncated_template_sans_markup %>
+  <h6><%= template.title %></h6>
+  <h7>By: <%= template.user.name %></h7>
+  <br /><br />
 
-    </p>
-    <% end %>
-    <br /><br />
-    <%= pluralize (template.template).scan(/\w+/).size, "word" %> long | <% present template do |presenter| %><%= pluralize presenter.get_words_count, "editable" %><%end%><br />
-    <%= link_to 'View Template', template %> |
-    <%= link_to 'Fill In!', new_radlib_path(template_id: template) %> |
-    <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% present template do |presenter| %>
+    <p><%= presenter.truncated_template_sans_markup %></p>
+  <% end %>
+  <br /><br />
 
-    <div class="pull-right">
+  <%= pluralize (template.template).scan(/\w+/).size, "word" %> |
+
+  <% present template do |presenter| %>
+    <%= pluralize presenter.get_words_count, "editable" %>
+  <%end%>
+  <br />
+
+  <%= link_to 'View Template', template %> |
+  <% if can? :create, Radlib %>
+    <%= link_to 'Fill out!', new_radlib_path(template_id: template) %>
+  <% end %>
+
+  <div class="pull-right">
     | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
-    <% if current_user && !current_user.voted_for?(template) %>
+    <% if current_user %>
       | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
       | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
     <% end %>
-	</div>
+  </div>
   <hr>
 <% end %>
 <br />
-<br />
-<% if user_signed_in? %>
-<%= link_to '+ New Template', new_template_path %>
-<% end %>

@@ -2,22 +2,11 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-
     <%= f.input :title, :input_html => {:class => "span4"} %>
-
     <%= f.input :template, :input_html => {:class => "span8"} %>
-
     <%= f.input :user_id, :as => :hidden, :value => current_user %>
-
   </div>
-
   <br />
 
-  <span class="warning">
-    Once your template has been published, you won't be able to come back and
-    edit it again. Please make sure you're ready to publish.
-  </span>
-  <br />
-  <%= f.button :submit, "Publish Template", :class => "btn-inverse"%>
-
+  <%= f.button :submit, "Publish Template", :class => "btn-inverse btn-mini"%>
 <% end %>

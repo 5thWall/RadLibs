@@ -16,19 +16,11 @@ class TemplatePresenter
 
   def get_words_count
     p_toks = lambda { |tok| (tok.instance_of? Array) && (tok[0] == :mustache) }
-    t = Mustache::Template.new(@template.template).tokens.find_all &p_toks
+    t = Mustache::Template.new(sanitized_template).tokens.find_all &p_toks
     t.inject(0) do |m, v|
       m += 1
     end
   end
-
-#   def get_words_count
-#     p_toks = lambda { |tok| (tok.instance_of? Array) && (tok[0] == :mustache) }
-#     tokens = Mustache::Template.new(@template.template).tokens.find_all &p_toks
-#     tokens.inject(0) do |m,v|
-#       m++
-#     end
-#   end
 
 private
 
@@ -41,18 +33,30 @@ private
   DELIMETER_END = /\}\}/    # /\}/
 
   def truncated_escaped_template
-    template = @page_template.truncate @template.template, omission: "...", length: 360, seperator: ' '
+    template = @page_template.truncate sanitized_template, omission: "...", length: 360, seperator: ' '
     template = template.gsub DELIMITER_START, '{{{'
     template.gsub DELIMETER_END, '}}}'
   end
 
   def escaped_template
-    template = @template.template.gsub DELIMITER_START, '{{{'
+    template = sanitized_template.gsub DELIMITER_START, '{{{'
     template.gsub DELIMETER_END, '}}}'
   end
 
   def unescaped_template
-    @template.template
+    sanitized_template
+  end
+
+  def sanitized_template
+    template = @template.template
+    template = template.gsub /\{\{\{/, '{{'
+    template = template.gsub /\}\}\}/, '}}'
+    template = template.gsub /\{\{(.*?)\}\}/ do |match|
+      str = $1.split(' ').join('_')
+      "{{#{str}}}"
+    end
+    template = template.gsub /\{\{[\#\/\^\=]/, '{{'
+    template.gsub /\=\}\}/, '}}'
   end
 end
 

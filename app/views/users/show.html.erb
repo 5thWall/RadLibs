@@ -20,13 +20,12 @@
          <% end %>         <br />
           </p>
           <br />
-          <%= link_to 'Show', template %> |
-          <%= link_to 'Edit', edit_template_path(template) %> |
-          <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Show', template %>
+         
           
           <div class="pull-right">
           | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
-          <% if current_user && !current_user.voted_for?(template) %>
+          <% if current_user && !current_user.voted_for_template?(template) %>
             | <%= link_to "up", vote_template_path(template, type: "up"), method: "post" %>
             | <%= link_to "down", vote_template_path(template, type: "down"), method: "post" %>
           <% end %>
@@ -44,9 +43,14 @@
          <% end %>
           </p>
           <br />
-          <%= link_to 'Show', radlib %> |
-          <%= link_to 'Edit', edit_template_path(radlib) %> |
-          <%= link_to 'Destroy', radlib, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Show', radlib %>
+       <div class="pull-right">
+           | <%= pluralize radlib.reputation_for(:votes).to_i, "vote" %>
+           <% if current_user && !current_user.voted_for_radlib?(radlib) %>
+             | <%= link_to "up", vote_radlib_path(radlib, type: "up"), method: "post" %>
+             | <%= link_to "down", vote_radlib_path(radlib, type: "down"), method: "post" %>
+           <% end %>
+           </div>
        
         <hr>
       <% end %>

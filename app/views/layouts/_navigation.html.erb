@@ -1,41 +1,34 @@
-<%= link_to image_tag( 'logo.png'), root_path, :class => 'brand' %>
-<ul class="nav">
-  <% if user_signed_in? %>
-    <li>
-    <%= link_to 'Templates', templates_path %>
-    </li>
-    <li>
-    <%= link_to 'Radlibs', radlibs_path %>
-    </li>
+<%= link_to image_tag( 'logo_big.png'), root_path, :class => 'brand' %>
+<%= link_to image_tag( 'logo_big.png'), root_path, :class => 'brand2' %>
 
+<ul class="nav">
+  <% if can? :read, Template %>
+    <li><%= link_to 'Templates', templates_path %></li>
+  <% end %>
+
+  <% if can? :read, Radlib %>
+    <li><%= link_to 'Radlibs', radlibs_path %></li>
+  <% end %>
 </ul>
-<%end%>
+
 <ul class="nav pull-right">
   <% if user_signed_in? %>
-    <li>
-    <%= link_to 'Logout', signout_path %>
-    </li>
+    <li><%= link_to 'Logout', signout_path %></li>
 
-</ul>
   <% else %>
     <% unless Rails.env.production? %>
-    <li>
-      <%= link_to 'Developer Login', '/auth/developer' %>
-    </li>
+      <li><%= link_to 'Developer Login', '/auth/developer' %></li>
     <% end %>
-    <li>
-      <%= link_to 'Sign in with Twitter', '/auth/twitter' %>
-    </li>
-</ul>
-  <% end %>
-  <% if user_signed_in? %>
-    <% if current_user.has_role? :admin %>
-    <ul class="nav pull-right">
-      <li>
-          <%= link_to current_user.name, user_path(current_user) %>
-      </li>
-      <li><%= link_to current_user.reputation_for(:votes).to_i, user_path(current_user), :class => "rep" %></li>
-      </ul>
-    <% end %>
+
+    <li><%= link_to 'Sign in with Twitter', '/auth/twitter' %></li>
   <% end %>
 </ul>
+
+<% if user_signed_in? %>
+  <ul class="nav pull-right">
+    <li><%= link_to current_user.name, user_path(current_user) %></li>
+    <li>
+      <%= link_to current_user.reputation_for(:votes).to_i, user_path(current_user), :class => "rep" %>
+    </li>
+  </ul>
+<% end %>

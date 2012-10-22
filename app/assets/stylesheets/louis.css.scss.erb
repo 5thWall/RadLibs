@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Trocchi|Droid+Sans);
 body{
-	background:url(<%= asset_path "bg2.png" %>);
+	background: #07061c!important;
 	font-family: Droid Sans, helvetica;	
 	font-size: 12px;
 	color: #806e5e;
@@ -9,13 +9,27 @@ a{
 	font-family: Droid Sans, helvetica;	
 	color: #6c9aa8;
 }
-h1,h2,h3,h4,h5,h7{
-font-family: Trocchi, helvetica;
+h1,h2,h3,h4,h5{
+margin: 0.5% 0;
+font-family: Trocchi, georgia;
 color: #f16e38;	
 }
 h6{
-font-family: Trocchi, helvetica;
+margin: 0.5% 0;
+font-family: Trocchi, georgia;
 color: #2b241e;		
+}
+h7{
+margin: 0.5% 0;
+font-family: Droid Sans, helvetica;
+color: #2b241e;		
+margin: -30px 0px 10px 0px;
+}
+.navbar-static-top {
+position: static;
+width: 100%;
+margin-bottom: -50px;
+margin-top: -30px;
 }
 .navbar-inner {
 min-height: 40px;
@@ -29,6 +43,12 @@ box-shadow: none;
 .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
 box-shadow:none;
 }
+.navbar-fixed-top, .navbar-fixed-bottom {
+position: fixed;
+right: 0;
+left: 0;
+margin-bottom: 0;
+}
 .container{
 	margin-top: 20px;
 }
@@ -36,7 +56,7 @@ box-shadow:none;
 	margin-top: 20px;
 	background:white;
 	box-shadow: 0px 2px 1px #85a379;
-	border-radius:0px;
+	border-radius:5px;
 	min-height: 700px;
 }
 .navbar .nav > li > a {
@@ -44,11 +64,11 @@ float: none;
 padding: 20px 15px 10px;
 color: white;
 text-decoration: none;
-text-shadow: 0 1px 0 #85a379;
+text-shadow: none;
 font-family: Droid Sans, helvetica;	
 }
 .navbar .nav > li > a:hover {
-color: 2b241e;
+color: #feebaa;
 transition: color 0.5s;
 -moz-transition: color 0.5s; /* Firefox 4 */
 -webkit-transition: color 0.5s; /* Safari and Chrome */
@@ -64,6 +84,35 @@ font-weight: 200;
 color: #555;
 text-shadow: 0 1px 0 white;
 }
+.navbar .brand:hover {
+opacity: 0;
+float: left;
+display: block;
+padding: 0px 20px 10px 0px;
+margin-left: -20px;
+font-size: 20px;
+font-weight: 200;
+color: #555;
+text-shadow: 0 1px 0 white;
+transition: opacity 0.2s ease-in;
+-moz-transition: opacity 0.2s ease-in; /* Firefox 4 */
+-webkit-transition: opacity 0.2s ease-in; /* Safari and Chrome */
+-o-transition: opacity 0.2s ease-in; /* Opera */
+}
+.navbar .brand2 {
+float: left;
+display: block;
+padding: 0px 20px 10px 0px;
+margin-left: -20px;
+font-size: 20px;
+font-weight: 200;
+color: #555;
+text-shadow: 0 1px 0 white;
+position:relative;
+left: -257px;
+z-index:-1;
+margin-right: -153px;
+}
 .rep{
 	color: white!important;
 	font-size:18px;
@@ -75,6 +124,10 @@ text-shadow: 0 1px 0 white;
 	background:url(<%= asset_path "rep.png" %>) no-repeat;
 	width:55px;
 	margin-left:10px;
+}
+.rep:hover{
+	background:url(<%= asset_path "rep_hover.png" %>) no-repeat;
+	background-position:-8px -8px;
 }
 .itsnew{
 	background:url(<%= asset_path "new.png" %>) no-repeat;
@@ -104,4 +157,42 @@ width: 5px;
 margin-left: 0px;
 font: 18px Droid Sans, helvetica;
 text-align: center;
+}
+.sidebar{
+	background:#efefef;
+	min-height: 650px;
+	border-radius:3px;
+	padding: 10px 10px 10px 15px ;
+	border: 1px #dcdcdc solid;
+}
+.home_main{
+
+}
+.sidebar h6{
+	text-decoration:underline;
+}
+.sidebar hr{
+color: #dcdcdc;
+background-color: #dcdcdc;
+height: 1px;
+}
+#main{
+	background: url(/assets/shine.png) no-repeat;
+	background-position:100px -600px;
+	overflow: visible;
+	margin-top: -300px;
+	padding-top:300px;
+}
+.titlehalf{
+	height: 40px;
+	margin-right: 20px;
+}
+.name_push{
+	margin-top: -40px;
+	opacity: 0.7;
+}
+#tagline{
+	color: #2b241e;
+	font-family: Droid sans;
+	margin: 15px 0px 30px 0px;
 }
