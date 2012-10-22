@@ -6,6 +6,8 @@ class Ability
 
     user || return # Unknown users get to do nothing
 
+    can :vote, :all
+
     if user.has_role? :admin
       can :manage, :all
     else
