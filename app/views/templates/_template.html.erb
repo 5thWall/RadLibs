@@ -14,8 +14,10 @@
 <%= pluralize (template.template).scan(/\w+/).size, "word" %> |
 
 <% present template do |presenter| %>
-  <%= pluralize presenter.get_words_count, "editable" %>
+  <%= pluralize presenter.get_words_count, "editable" %> |
 <%end%>
+
+<%= template.radlibs.count %> Filled In
 <br />
 
 <%= link_to 'View Template', template %> |
