@@ -3,28 +3,6 @@
 <h3>Radlibs</h3>
 <hr />
 
-<% @radlibs.each do |radlib| %>
-  <%if radlib.created_at >= Time.now - 24.hours%>
-    <div class="itsnew pull-right"></div>
-  <%end%>
-
-  <h6><%= radlib.template.title %></h6>
-
-  <% present radlib do |presenter| %>
-    <%= presenter.filled_in_radlib %>
-  <% end %><br /><br />
-
-  <%= link_to 'Show', radlib %> |
-  <%= link_to 'View Template', template_path(radlib.template) %>
-
-  <div class="pull-right">
-    | <%= pluralize radlib.reputation_for(:votes).to_i, "vote" %>
-    <% if current_user && !current_user.voted_for_radlib?(radlib) %>
-      | <%= link_to "up", vote_radlib_path(radlib, type: "up"), method: "post" %>
-      | <%= link_to "down", vote_radlib_path(radlib, type: "down"), method: "post" %>
-    <% end %>
-  </div>
-  <hr>
-<% end %>
+<%= render @radlibs %>
 
 <%= link_to "Back", :back %>
