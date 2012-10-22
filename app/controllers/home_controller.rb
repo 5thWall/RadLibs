@@ -3,8 +3,8 @@ class HomeController < ApplicationController
     @toprated = User.find_with_reputation(:votes, :all, {:conditions => ["votes > ?", 0], :order => "votes desc", :limit => 5})
     @toptemplates = Template.find_with_reputation(:votes, :all, {:conditions => ["votes > ?", 0], :order => "votes desc", :limit => 5})
     @topradlibs = Radlib.find_with_reputation(:votes, :all, {:conditions => ["votes > ?", 0], :order => "votes desc", :limit => 5})
-    @recenttemplates = Template.where(:created_at => (Time.now - 24.hours)..(Time.now)).limit(5)
-    @recentradlibs = Radlib.where(:created_at => (Time.now - 24.hours)..(Time.now)).limit(5)
+    @recenttemplates = Template.find(:all, :order => "id desc", :limit => 5).reverse
+    @recentradlibs = Radlib.find(:all, :order => "id desc", :limit => 5).reverse
   end
 
   def aboutus
