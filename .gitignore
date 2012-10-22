@@ -6,7 +6,7 @@
 # The original version of this file is found here:
 # https://github.com/RailsApps/rails3-application-templates/raw/master/files/gitignore.txt
 #
-# Corrections? Improvements? Create a GitHub issue: 
+# Corrections? Improvements? Create a GitHub issue:
 # http://github.com/RailsApps/rails3-application-templates/issues
 #----------------------------------------------------------------------------
 
@@ -66,14 +66,18 @@ pickle-email-*.html
 # Netbeans project directory
 /nbproject/
 
-# RubyMine project files
+# Ignore editor files
+## RubyMine project files
 .idea
 
-# Textmate project files
+## Textmate project files
 /*.tmproj
 
-# vim artifacts
+## vim artifacts
 **.swp
+
+## Espresso project files
+/*.esproj
 
 # Ignore application configuration
 /config/application.yml
