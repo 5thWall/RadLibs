@@ -2,7 +2,7 @@ class RadlibsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @radlibs = Radlib.find(:all, :order => "created_at desc")
+    @radlibs = Radlib.all
   end
 
   def show

@@ -5,9 +5,10 @@ class Radlib < ActiveRecord::Base
 
   has_reputation :votes, source: :user, aggregated_by: :sum
 
+  default_scope order: "created_at desc"
   scope :toprated, find_with_reputation(:votes, :all,
     {:conditions => ["votes > ?", 0],
       :order => "votes desc",
       :limit => 5})
-  scope :recent, order: "id desc", limit: 5
+  scope :recent, limit: 5
 end
