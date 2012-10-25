@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     @toprated = User.toprated
     @toptemplates = Template.toprated
     @topradlibs = Radlib.toprated
-    @recenttemplates = Template.find(:all, :order => "id desc", :limit => 5).reverse
+    @recenttemplates = Template.recent
     @recentradlibs = Radlib.find(:all, :order => "id desc", :limit => 5).reverse
   end
 

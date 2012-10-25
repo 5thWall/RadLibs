@@ -10,4 +10,5 @@ class Template < ActiveRecord::Base
     {:conditions => ["votes > ?", 0],
       :order => "votes desc",
       :limit => 5})
+  scope :recent, order: "id desc", limit: 5
 end
