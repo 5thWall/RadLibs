@@ -19,7 +19,7 @@ class RadlibsController < ApplicationController
     if @radlib.save
       redirect_to template_path(@radlib.template), notice: 'Radlib was successfully created.'
     else
-      render action: "new"
+      render :new
     end
   end
 
@@ -27,7 +27,7 @@ class RadlibsController < ApplicationController
     if @radlib.update_attributes(params[:radlib])
       redirect_to @radlib, notice: 'Radlib was successfully updated.'
     else
-      render action: "edit"
+      render :edit
     end
   end
 
