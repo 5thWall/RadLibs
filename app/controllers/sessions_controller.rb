@@ -5,10 +5,10 @@ class SessionsController < ApplicationController
                       :uid => auth['uid'].to_s).first || User.create_with_omniauth(auth)
     session[:user_id] = user.id
     user.add_role :admin if User.count == 1 # make the first user an admin
-    if user.email.blank?
-      redirect_to edit_user_path(user), :alert => "Please enter your email address."
-    else
+    if user.email?
       redirect_to root_url, :notice => 'Signed in!'
+    else
+      redirect_to edit_user_path(user), :alert => "Please enter your email address."
     end
 
   end
