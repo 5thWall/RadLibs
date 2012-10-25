@@ -3,6 +3,6 @@
 <h3>Fill Out <%= @radlib.template.title %></h3>
 <hr>
 
-<%= render 'form' %>
+<%= render 'form', radlib: @radlib %>
 
 <%= link_to 'Back', radlibs_path %>

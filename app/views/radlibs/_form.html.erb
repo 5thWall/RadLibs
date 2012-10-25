@@ -1,8 +1,8 @@
-<%= simple_form_for(@radlib) do |f| %>
+<%= simple_form_for(radlib) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <% present @radlib do |presenter| %>
+    <% present radlib do |presenter| %>
       <div id="radlib">
         <%= presenter.editable_radlib %>
       </div>
