@@ -1,14 +1,16 @@
 class User < ActiveRecord::Base
   rolify
   attr_accessible :provider, :uid, :name, :email
-  
+
   has_many :templates
   has_many :radlibs
-  
+
   has_many :evaluations, class_name: "RSEvaluation", as: :source
-  
+
   has_reputation :votes, source: [{reputation: :votes, of: :templates}, {reputation: :votes, of: :radlibs}], aggregated_by: :sum
-  
+
+  scope :toprated, find_with_reputation(:votes, :all, {:conditions => ["votes > ?", 0], :order => "votes desc", :limit => 5})
+
   def voted_for_template?(template)
     evaluations.where(target_type: "Template", target_id: template.id).present?
   end
