@@ -19,7 +19,7 @@ Radlibs5::Application.configure do
   # change to true to allow email to be sent during development
   config.action_mailer.perform_deliveries = false
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default :charset => "utf-8"  
+  config.action_mailer.default :charset => "utf-8"
 
     config.action_mailer.smtp_settings = {
       :address   => "smtp.mandrillapp.com",
@@ -27,8 +27,6 @@ Radlibs5::Application.configure do
       :user_name => ENV["MANDRILL_USERNAME"],
       :password  => ENV["MANDRILL_API_KEY"]
     }
-
-
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

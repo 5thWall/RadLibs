@@ -21,8 +21,7 @@
           </p>
           <br />
           <%= link_to 'Show', template %>
-         
-          
+
           <div class="pull-right">
           | <%= pluralize template.reputation_for(:votes).to_i, "vote" %>
           <% if current_user && !current_user.voted_for_template?(template) %>
@@ -32,7 +31,7 @@
       	</div>
         <hr>
       <% end %>
-      
+
     </div>
     <div class="tab-pane" id="tab2">
       <% @user.radlibs.each do |radlib| %>
@@ -51,10 +50,8 @@
              | <%= link_to "down", vote_radlib_path(radlib, type: "down"), method: "post" %>
            <% end %>
            </div>
-       
         <hr>
       <% end %>
-      
     </div>
   </div>
 </div>
