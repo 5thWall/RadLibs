@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
     else
       redirect_to edit_user_path(user), :alert => "Please enter your email address."
     end
-
   end
 
   def destroy
@@ -21,5 +20,4 @@ class SessionsController < ApplicationController
   def failure
     redirect_to root_url, :alert => "Authentication error: #{params[:message].humanize}"
   end
-
 end
