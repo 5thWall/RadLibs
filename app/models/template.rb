@@ -5,4 +5,9 @@ class Template < ActiveRecord::Base
 
   has_reputation :votes, source: :user, aggregated_by: :sum
   resourcify
+
+  scope :toprated, find_with_reputation(:votes, :all,
+    {:conditions => ["votes > ?", 0],
+      :order => "votes desc",
+      :limit => 5})
 end
