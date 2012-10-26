@@ -1,8 +1,10 @@
-<% content_for :title do "#{@radlib.template.title} by #{@radlib.user.name}" end %>
+<% content_for :title do
+  "#{@radlib.template_title} by #{@radlib.user_name}"
+  end %>
 
 <p>
-  <h3><%= @radlib.template.title %></h3>
-  <h4>Filled in by: <%= @radlib.user.name %></h4>
+  <h3><%= @radlib.template_title %></h3>
+  <h4>Filled in by: <%= @radlib.user_name %></h4>
 </p>
 
 <% present @radlib do |presenter| %>

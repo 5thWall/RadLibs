@@ -35,7 +35,7 @@
     </div>
     <div class="tab-pane" id="tab2">
       <% @user.radlibs.each do |radlib| %>
-          <h6><%= radlib.template.title %></h6>
+          <h6><%= radlib.template_title %></h6>
           <p>
          <% present radlib do |presenter| %>
          <%= presenter.filled_in_radlib %>

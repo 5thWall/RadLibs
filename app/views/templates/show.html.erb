@@ -1,4 +1,6 @@
-<% content_for :title do "#{@template.title} by #{@template.user.name}" end %>
+<% content_for :title do
+  "#{@template.title} by #{@template.user_name}"
+  end %>
 
 <p id="notice"><%= notice %></p>
 
@@ -24,7 +26,7 @@
 <hr>
 
 <% @template.radlibs.each_with_index do |radlib, n|%>
-  <h6 class="pull-left titlehalf"><%= n + 1%>. <%= radlib.user.name %><br />
+  <h6 class="pull-left titlehalf"><%= n + 1%>. <%= radlib.user_name %><br />
     <div class="pull-left"><%= link_to "Read", radlib_path(radlib) %></div></h6>
 
   <% present radlib do |presenter| %>

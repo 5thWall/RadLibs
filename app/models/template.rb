@@ -3,6 +3,8 @@ class Template < ActiveRecord::Base
   has_many :radlibs
   belongs_to :user
 
+  delegate :name, to: :user, prefix: true
+
   has_reputation :votes, source: :user, aggregated_by: :sum
   resourcify
 
