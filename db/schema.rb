@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013084124) do
+ActiveRecord::Schema.define(:version => 20121027030049) do
 
   create_table "radlibs", :force => true do |t|
-    t.integer  "template_id"
+    t.string   "title"
+    t.text     "template",   :limit => 360
     t.integer  "user_id"
-    t.text     "words"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -76,12 +76,12 @@ ActiveRecord::Schema.define(:version => 20121013084124) do
   add_index "rs_reputations", ["reputation_name"], :name => "index_rs_reputations_on_reputation_name"
   add_index "rs_reputations", ["target_id", "target_type"], :name => "index_rs_reputations_on_target_id_and_target_type"
 
-  create_table "templates", :force => true do |t|
-    t.string   "title"
-    t.text     "template",   :limit => 360
+  create_table "stories", :force => true do |t|
+    t.integer  "radlib_id"
     t.integer  "user_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.text     "words"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

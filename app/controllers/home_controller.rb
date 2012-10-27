@@ -1,10 +1,10 @@
 class HomeController < ApplicationController
   def index
     @toprated = User.toprated
-    @toptemplates = Template.toprated
     @topradlibs = Radlib.toprated
-    @recenttemplates = Template.recent
+    @topstories = Story.toprated
     @recentradlibs = Radlib.recent
+    @recentstories = Story.recent
   end
 
   def aboutus

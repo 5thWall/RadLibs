@@ -1,12 +1,12 @@
 Radlibs5::Application.routes.draw do
 
-  resources :radlibs, only: [:show, :new, :create, :update, :destroy, :index] do
+  resources :stories, only: [:show, :new, :create, :update, :destroy, :index] do
   	member do
   		post :vote
   	end
   end
 
-  resources :templates, only: [:show, :new, :create, :destroy, :index] do
+  resources :radlibs, only: [:show, :new, :create, :destroy, :index] do
   	member do
   		post :vote
   	end

@@ -1,0 +1,22 @@
+<% content_for :title do
+  "#{@story.radlib_title} by #{@story.user_name}"
+  end %>
+
+<p>
+  <h3><%= @story.radlib_title %></h3>
+  <h4>Filled in by: <%= @story.user_name %></h4>
+</p>
+
+<% present @story do |presenter| %>
+  <p><%= presenter.filled_in_story %></p>
+<% end %>
+<br />
+
+<%= link_to 'Back', stories_path %>
+<div class="pull-right">
+  | <%= pluralize @story.reputation_for(:votes).to_i, "vote" %>
+  <% if current_user && !current_user.voted_for_story?(@story) %>
+    | <%= link_to "up", vote_story_path(@story, type: "up"), method: "post" %>
+    | <%= link_to "down", vote_story_path(@story, type: "down"), method: "post" %>
+  <% end %>
+</div>

@@ -3,47 +3,15 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  if $('form#new_radlib').length > 0
+  if $('form#new_radlib').lenght > 0
     setup_new()
 
-setup_new = (form) ->
-  populate_field = ->
-    vals = {}
-
-    $("span[data-type='array']").each ->
-      key = $(@).data 'key'
-      val = $(@).text()
-      vals[key] ||= []
-      vals[key].push val
-
-    $("span[data-type='single']").each ->
-      key = $(@).data 'key'
-      val = $(@).text()
-      vals[key] = val
-
-    $("input#radlib_words").val JSON.stringify(vals)
-
+setup_new = ->
   $("input[type='submit']").click ->
-    populate_field()
+    text = $ 'textarea#radlib_template'
+    str = text.val()
+    str = str.replace /\{\{(.*?)\}\}/g, (match, p1) ->
+      string = p1.split(' ').join('_')
+      "{{#{string}}}"
 
-  $("span[contenteditable='true']").each ->
-    $(@).focus ->
-      orig_txt = $(@).text()
-      $(@).data 'orig', $(@).text()
-
-    $(@).blur ->
-      if /^\s*$/.exec($(@).text())?
-        orig_text = $(@).data('orig') || $(@).data('key')
-        $(@).text orig_text
-
-  $("span[data-type='single']").each ->
-    $(@).blur ->
-      key = $(@).data 'key'
-      text = $(@).text()
-
-      if /^\s*$/.exec(text)? then return
-
-      $("span[data-key='#{key}']").each ->
-        $(@).text(text)
-
-
+    text.val str

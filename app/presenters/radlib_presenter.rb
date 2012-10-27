@@ -4,14 +4,22 @@ class RadlibPresenter
     @template = template
   end
 
-  def filled_in_radlib
-    words = RadlibDisplay.new words_data
-    words.render unescaped_template
+  def truncated_radlib_sans_markup
+    edit = RadlibSansMarkup.new unescaped_template
+    edit.render(truncated_escaped_template).html_safe
   end
 
-  def editable_radlib
-    edit = RadlibEdit.new unescaped_template
+  def radlib_sans_markup
+    edit = RadlibSansMarkup.new unescaped_template
     edit.render(escaped_template).html_safe
+  end
+
+  def get_words_count
+    p_toks = lambda { |tok| (tok.instance_of? Array) && (tok[0] == :mustache) }
+    t = Mustache::Template.new(sanitized_template).tokens.find_all &p_toks
+    t.inject(0) do |m, v|
+      m += 1
+    end
   end
 
 private
@@ -19,10 +27,16 @@ private
   # We can change the delimeter so authors only need to use one
   #  bracket to enclose editable areas by changing this delimeter
   #  and editing unescaped_template to substitue double brackets
-  #  like escaped_template does
+  #  like escaped_radlib does
   # -- Andy (@5thWall)
   DELIMITER_START = /\{\{/  # /\}/
   DELIMETER_END = /\}\}/    # /\}/
+
+  def truncated_escaped_template
+    template = @template.truncate sanitized_template, omission: "...", length: 360, seperator: ' '
+    template = template.gsub DELIMITER_START, '{{{'
+    template.gsub DELIMETER_END, '}}}'
+  end
 
   def escaped_template
     template = sanitized_template.gsub DELIMITER_START, '{{{'
@@ -34,7 +48,7 @@ private
   end
 
   def sanitized_template
-    template = @radlib.template.template
+    template = @radlib.template
     template = template.gsub /\{\{\{/, '{{'
     template = template.gsub /\}\}\}/, '}}'
     template = template.gsub /\{\{(.*?)\}\}/ do |match|
@@ -44,78 +58,19 @@ private
     template = template.gsub /\{\{[\#\/\^\=]/, '{{'
     template.gsub /\=\}\}/, '}}'
   end
-
-  def words_data
-    begin
-      JSON.parse @radlib.words
-    rescue
-      { "Adjective" => ["pretty", "stupid", "ugly", "bitchin'", "shiny", "user-centric", "subtle", "default"],
-        "adjective" => ["pretty", "stupid", "ugly", "bitchin'", "shiny", "user-centric", "subtle", "default"],
-        "Verb" => ["share", "kill", "run", "code"],
-        "verb" => ["share", "kill", "run", "code"],
-        "Noun" => ["Princess", "dog", "friends", "code", "Internet"],
-        "noun" => ["pony", "unicorn", "Rails Rumble 2012"]
-      }
-    end
-  end
 end
 
-class RadlibDisplay < Mustache
-  def initialize(data)
-    data.each do |k, v|
-      if v.is_a?(Array)
-        create_generic_method k, v
-      else
-        create_numbered_method k, v
-      end
-    end
-  end
-
-private
-
-  def create_generic_method(name, value)
-    @vals ||= {}
-    @vals[name] = value
-
-    self.class.send(:define_method, name) do
-      @vals[name].shift
-    end
-  end
-
-  def create_numbered_method(name, value)
-    self.class.send(:define_method, name) do
-      value
-    end
-  end
-end
-
-class RadlibEdit < Mustache
+class RadlibSansMarkup < Mustache
   def initialize(template)
     words = get_words template
     words.each do |w|
-      if /\d$/ =~ w
-        create_numbered_method w
-      else
-        create_generic_method w
+      self.class.send(:define_method, w) do
+        "<span class='highlight2'>#{w}</span>"
       end
     end
   end
 
 private
-
-  def create_numbered_method(name)
-    self.class.send(:define_method, name) do
-      "<span class='highlight' data-key='#{name}' data-type='single' contenteditable='true' onclick=\"document.execCommand('selectAll',false,null)\">#{name}</span>"
-    end
-  end
-
-  def create_generic_method(name)
-    self.class.send(:define_method, name) do
-      @nums ||= Hash.new(-1)
-      num = @nums[name] += 1
-      "<span class='highlight' data-key='#{name}' data-type='array' data-index='#{num}' contenteditable='true' onclick=\"document.execCommand('selectAll',false,null)\">#{name}</span>"
-    end
-  end
 
   def get_words(template)
     p_toks = lambda { |tok| (tok.instance_of? Array) && (tok[0] == :mustache) }

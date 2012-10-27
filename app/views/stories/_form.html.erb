@@ -1,0 +1,17 @@
+<%= simple_form_for(story) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <% present story do |presenter| %>
+      <div id="story">
+        <%= presenter.editable_story %>
+      </div>
+    <% end %>
+
+    <%= f.input :words, as: :hidden %>
+    <%= f.association :radlib, as: :hidden %>
+  </div>
+  <br /><br />
+
+  <%= f.button :submit, :class => "btn-inverse btn-mini" %>
+<% end %>

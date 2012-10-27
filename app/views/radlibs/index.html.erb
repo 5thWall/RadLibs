@@ -1,8 +1,11 @@
-<% content_for :title do %>Viewing radlibs<% end %>
+<% content_for :title do %>Viewing Radlibs<% end %>
 
 <h3>Radlibs</h3>
-<hr />
+
+<% if can? :create, Radlib %>
+  <div><%= link_to '+ New Radlib', new_radlib_path %></div>
+<% end %>
+<hr>
 
 <%= render @radlibs %>
-
-<%= link_to "Back", :back %>
+<br />

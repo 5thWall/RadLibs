@@ -1,0 +1,21 @@
+<%if story.created_at >= Time.now - 24.hours%>
+  <div class="itsnew pull-right"></div>
+<%end%>
+
+<h6><%= story.radlib_title %></h6>
+
+<% present story do |presenter| %>
+  <%= presenter.filled_in_story %>
+<% end %><br /><br />
+
+<%= link_to 'Show', story %> |
+<%= link_to 'View Radlib', radlib_path(story.radlib) %>
+
+<div class="pull-right">
+  | <%= pluralize story.reputation_for(:votes).to_i, "vote" %>
+  <% if current_user && !current_user.voted_for_story?(story) %>
+    | <%= link_to "up", vote_story_path(story, type: "up"), method: "post" %>
+    | <%= link_to "down", vote_story_path(story, type: "down"), method: "post" %>
+  <% end %>
+</div>
+<hr>

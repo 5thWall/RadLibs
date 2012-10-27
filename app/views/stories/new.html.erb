@@ -1,0 +1,8 @@
+<% content_for :title do "Filling Out: #{@story.radlib_title}" end %>
+
+<h3>Fill Out <%= @story.radlib_title %></h3>
+<hr>
+
+<%= render 'form', story: @story %>
+
+<%= link_to 'Back', stories_path %>

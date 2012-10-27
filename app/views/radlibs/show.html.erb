@@ -1,22 +1,44 @@
 <% content_for :title do
-  "#{@radlib.template_title} by #{@radlib.user_name}"
+  "#{@radlib.title} by #{@radlib.user_name}"
   end %>
 
-<p>
-  <h3><%= @radlib.template_title %></h3>
-  <h4>Filled in by: <%= @radlib.user_name %></h4>
-</p>
+<p id="notice"><%= notice %></p>
+
+<h4><%= @radlib. title %></h4>
 
 <% present @radlib do |presenter| %>
-  <p><%= presenter.filled_in_radlib %></p>
+  <p><%= presenter.radlib_sans_markup %></p>
 <% end %>
 <br />
 
-<%= link_to 'Back', radlibs_path %>
+<%= link_to 'Back', radlibs_path %> |
+<% if can? :create, Radlib %>
+  <%= link_to 'Fill Out!', new_story_path(radlib_id: @radlib) %>
+<% end %>
+
 <div class="pull-right">
   | <%= pluralize @radlib.reputation_for(:votes).to_i, "vote" %>
-  <% if current_user && !current_user.voted_for_radlib?(@radlib) %>
+  <% if current_user && current_user.voted_for_radlib?(@radlib) %>
     | <%= link_to "up", vote_radlib_path(@radlib, type: "up"), method: "post" %>
     | <%= link_to "down", vote_radlib_path(@radlib, type: "down"), method: "post" %>
   <% end %>
 </div>
+<hr>
+
+<% @radlib.stories.each_with_index do |story, n|%>
+  <h6 class="pull-left titlehalf"><%= n + 1%>. <%= story.user_name %><br />
+    <div class="pull-left"><%= link_to "Read", story_path(story) %></div></h6>
+
+  <% present story do |presenter| %>
+    <p><%= presenter.filled_in_story %></p>
+
+    <div class="pull-right">
+      | <%= pluralize story.reputation_for(:votes).to_i, "vote" %>
+      <% if current_user && !current_user.voted_for_story?(story) %>
+        | <%= link_to "up", vote_story_path(story, type: "up"), method: "post" %>
+        | <%= link_to "down", vote_story_path(story, type: "down"), method: "post" %>
+      <% end %>
+    </div>
+    <br /><hr>
+  <% end %>
+<% end %>

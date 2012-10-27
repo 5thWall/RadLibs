@@ -2,16 +2,11 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <% present radlib do |presenter| %>
-      <div id="radlib">
-        <%= presenter.editable_radlib %>
-      </div>
-    <% end %>
-
-    <%= f.input :words, as: :hidden %>
-    <%= f.association :template, as: :hidden %>
+    <%= f.input :title, :input_html => {:class => "span4"} %>
+    <%= f.input :template, :input_html => {:class => "span8"} %>
+    <%= f.input :user_id, :as => :hidden, :value => current_user %>
   </div>
-  <br /><br />
+  <br />
 
-  <%= f.button :submit, :class => "btn-inverse btn-mini" %>
+  <%= f.button :submit, "Publish Radlib", :class => "btn-inverse btn-mini"%>
 <% end %>

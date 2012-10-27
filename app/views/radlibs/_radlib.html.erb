@@ -2,18 +2,32 @@
   <div class="itsnew pull-right"></div>
 <%end%>
 
-<h6><%= radlib.template_title %></h6>
+<h6><%= radlib.title %></h6>
+<h7>By: <%= radlib.user_name %></h7>
+<br /><br />
 
 <% present radlib do |presenter| %>
-  <%= presenter.filled_in_radlib %>
-<% end %><br /><br />
+  <p><%= presenter.truncated_radlib_sans_markup %></p>
+<% end %>
+<br /><br />
 
-<%= link_to 'Show', radlib %> |
-<%= link_to 'View Template', template_path(radlib.template) %>
+<%= pluralize (radlib.template).scan(/\w+/).size, "word" %> |
+
+<% present radlib do |presenter| %>
+  <%= pluralize presenter.get_words_count, "editable" %> |
+<%end%>
+
+<%= radlib.stories.count %> Filled In
+<br />
+
+<%= link_to 'View Radlib', radlib %> |
+<% if can? :create, Radlib %>
+  <%= link_to 'Fill out!', new_story_path(radlib_id: radlib) %>
+<% end %>
 
 <div class="pull-right">
   | <%= pluralize radlib.reputation_for(:votes).to_i, "vote" %>
-  <% if current_user && !current_user.voted_for_radlib?(radlib) %>
+  <% if current_user %>
     | <%= link_to "up", vote_radlib_path(radlib, type: "up"), method: "post" %>
     | <%= link_to "down", vote_radlib_path(radlib, type: "down"), method: "post" %>
   <% end %>

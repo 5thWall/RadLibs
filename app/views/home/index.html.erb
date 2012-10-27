@@ -6,19 +6,19 @@
   </h4>
   <hr>
 
-  <h5>Recent Radlib Templates</h5>
-
-  <div class="itsnew"></div>
-  <hr width="250px">
-
-  <%= render partial: 'templates/template', collection: @recenttemplates %>
-  <hr>
-
   <h5>Recent Radlibs</h5>
+
   <div class="itsnew"></div>
   <hr width="250px">
 
   <%= render partial: 'radlibs/radlib', collection: @recentradlibs %>
+  <hr>
+
+  <h5>Recent Stories</h5>
+  <div class="itsnew"></div>
+  <hr width="250px">
+
+  <%= render partial: 'stories/story', collection: @recentstories %>
 </div>
 <br /><br />
 
@@ -33,22 +33,22 @@
 	<%end%>
 	<hr>
 
-	<h6>Popular Radlib Templates</h6>
-
-  <% @toptemplates.each_with_index do |s, n| %>
-  	<%= n +1 %>.
-    <%=link_to s.title, template_path(s) %> |
-    <%=  s.reputation_for(:votes).to_i %> votes
-    <br />
-	<%end%>
-	<hr>
-
 	<h6>Popular Radlibs</h6>
 
   <% @topradlibs.each_with_index do |r, n| %>
   	<%= n +1 %>.
-    <%=link_to r.template.title, radlib_path(r) %> |
+    <%=link_to r.title, radlib_path(r) %> |
     <%=  r.reputation_for(:votes).to_i %> votes
+    <br />
+	<%end%>
+	<hr>
+
+	<h6>Popular Stories</h6>
+
+  <% @topstories.each_with_index do |s, n| %>
+  	<%= n +1 %>.
+    <%=link_to s.radlib.title, radlib_path(s) %> |
+    <%=  s.reputation_for(:votes).to_i %> votes
     <br />
 	<%end%>
 	<hr>
