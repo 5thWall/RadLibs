@@ -5,6 +5,7 @@
 <p id="notice"><%= notice %></p>
 
 <h4><%= @radlib. title %></h4>
+<a href="https://twitter.com/share" class="twitter-share-button" rel="Me" data-text="<%= "Fill in this #radlibs I #{@radlib.user == current_user ? 'made' : 'found'}: '#{@radlib.title}'!" %>">Tweet</a>
 
 <% present @radlib do |presenter| %>
   <p><%= presenter.radlib_sans_markup %></p>
