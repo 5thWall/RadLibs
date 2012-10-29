@@ -17,7 +17,23 @@ setup_tagline = ->
         orig_text = $(@).data('orig') || $(@).data('key')
         $(@).text orig_text
 
-      replace_title $('#tagline').text()
+      text = $('#tagline').text()
+
+      replace_title text
+      replace_tweet text
 
 replace_title = (text) ->
   $('title').text text
+
+replace_tweet = (text) ->
+  if $('#tweet-tagline').length > 0
+    $('#tweet-tagline iframe').remove()
+
+    tweetBtn = $('<a></a>')
+      .addClass('twitter-share-button')
+      .attr('href', 'http://twitter.com/share')
+      .attr('rel', 'canonical')
+      .attr('data-text', text)
+    $('#tweet-tagline').append tweetBtn
+
+    twttr.widgets.load()
