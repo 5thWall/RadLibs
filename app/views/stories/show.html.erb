@@ -5,6 +5,7 @@
 <p>
   <h3><%= @story.radlib_title %></h3>
   <h4>Filled in by: <%= @story.user_name %></h4>
+  <a href="https://twitter.com/share" class="twitter-share-button" rel="Me" data-text="<%= "Check out the #radlibs I #{@story.user == current_user ? 'filled out' : 'found'}: '#{@story.radlib_title}'!" %>">Tweet</a>
 </p>
 
 <% present @story do |presenter| %>
@@ -13,6 +14,7 @@
 <br />
 
 <%= link_to 'Back', stories_path %>
+
 <div class="pull-right">
   | <%= pluralize @story.reputation_for(:votes).to_i, "vote" %>
   <% if current_user && !current_user.voted_for_story?(@story) %>
