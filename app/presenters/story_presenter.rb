@@ -34,7 +34,7 @@ private
   end
 
   def sanitized_radlib
-    radlib = @story.radlib.template
+    radlib = @story.template
     radlib = radlib.gsub /\{\{\{/, '{{'
     radlib = radlib.gsub /\}\}\}/, '}}'
     radlib = radlib.gsub /\{\{(.*?)\}\}/ do |match|

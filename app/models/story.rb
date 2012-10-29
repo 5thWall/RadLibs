@@ -3,6 +3,7 @@ class Story < ActiveRecord::Base
   belongs_to :radlib
   belongs_to :user
 
+  delegate :template, to: :radlib
   delegate :title, to: :radlib, prefix: true
   delegate :name, to: :user, prefix: true
 
