@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027030049) do
+ActiveRecord::Schema.define(:version => 20121029034953) do
 
   create_table "radlibs", :force => true do |t|
     t.string   "title"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 20121027030049) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
+
+  add_index "radlibs", ["user_id"], :name => "index_radlibs_on_user_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -83,6 +85,9 @@ ActiveRecord::Schema.define(:version => 20121027030049) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "stories", ["radlib_id"], :name => "index_stories_on_radlib_id"
+  add_index "stories", ["user_id"], :name => "index_stories_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
